@@ -36,10 +36,12 @@ export function pickScattered(
   occupied: readonly Vec3[],
   count: number,
   separation: number,
+  accept: (point: Vec3) => boolean = () => true,
 ): [number, number, number][] {
   const picked: [number, number, number][] = []
   for (let i = 0; i < 96 && picked.length < count; i++) {
     const point = fibonacciPoint(i, 96, 0.92)
+    if (!accept(point)) continue
     const blocked = [...occupied, ...picked].some((other) => angularDistance(point, other) < separation)
     if (!blocked) picked.push(point)
   }

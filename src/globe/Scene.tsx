@@ -6,90 +6,90 @@ import { destinations, matchesFilter, scenery, type DestinationFilter } from '@/
 import { clamp, type Vec3 } from '@/data/math.ts'
 import { globeApi, pointerTravel } from '@/globe/api.ts'
 import { setGlobeCursor } from '@/globe/geometry.ts'
+import { DRAG, OPENING, facing, roll, spinOnAxis } from '@/globe/orientation.ts'
 import { DestinationMarker, Islet } from '@/globe/Destination.tsx'
-import { Atmosphere, Clouds, Graticule, Ocean } from '@/globe/Planet.tsx'
+import { Atmosphere, Clouds, Land, Ocean } from '@/globe/Planet.tsx'
+import { NorthPoleLandmark } from '@/globe/NorthPole.tsx'
+import { SmileScenery } from '@/globe/Smile.tsx'
+import { SouthPoleLandmark } from '@/globe/SouthPole.tsx'
+import { ProgrammingLetters, ProgrammingScenery } from '@/globe/Programming.tsx'
 
-const AXIS_Y = new THREE.Vector3(0, 1, 0)
-const AXIS_X = new THREE.Vector3(1, 0, 0)
-const Q_YAW = new THREE.Quaternion()
-const Q_PITCH = new THREE.Quaternion()
-const FOCUS = new THREE.Vector3(0, 1.25, 6.3).normalize()
-FOCUS.applyAxisAngle(new THREE.Vector3(1, 0, 0), 0.12)
-const NORMAL = new THREE.Vector3()
-
-const CAMERA_DEFAULT = 6.45
-const CAMERA_MIN = 4.2
-const CAMERA_MAX = 9.3
-const DRAG = 0.0052
-
-function spin(quaternion: THREE.Quaternion, yaw: number, pitch: number) {
-  Q_YAW.setFromAxisAngle(AXIS_Y, yaw)
-  Q_PITCH.setFromAxisAngle(AXIS_X, pitch)
-  quaternion.premultiply(Q_PITCH).premultiply(Q_YAW)
-}
+const CAMERA_MIN = 6.8
+const CAMERA_MAX = 16.9
+/** Open fully zoomed out, so the whole small planet and its clouds fit on screen. */
+const CAMERA_DEFAULT = CAMERA_MAX
+/** Seconds of quiet before the planet starts turning on its own. */
+const IDLE_DELAY = 2.4
+/**
+ * Radians per second of the idle turn at 1× speed, about one revolution a minute. The turn is
+ * around the planet's own north–south axis, west to east as Earth turns, wherever that axis points.
+ */
+const AUTO_SPIN = 0.1
 
 function GlobeRig({
   selectedId,
   reduced,
+  spin,
   children,
 }: {
   selectedId: string | null
   reduced: boolean
+  /** Multiplier on the idle turn. 0 holds the planet still. */
+  spin: number
   children: ReactNode
 }) {
+  const spinRef = useRef(spin)
+  useEffect(() => {
+    spinRef.current = spin
+  }, [spin])
   const group = useRef<THREE.Group>(null)
   const camera = useThree((state) => state.camera)
   const getThree = useThree((state) => state.get)
-  const mode = useRef<'free' | 'focus'>('free')
-  const target = useRef(new THREE.Quaternion())
+  /** Set while easing toward a chosen orientation: a shore, or the opening view. */
+  const target = useRef<THREE.Quaternion | null>(null)
   const distance = useRef(CAMERA_DEFAULT)
   const dragging = useRef(false)
-  const idle = useRef(0)
-  const angular = useRef({ x: 0, y: 0 })
-  const selectedRef = useRef(selectedId)
+  // Start past the idle delay, so the planet is already turning when the page opens.
+  const idle = useRef(IDLE_DELAY)
+  /** Coasting after a flick: pixels per second along the screen's x and y. */
+  const velocity = useRef({ x: 0, y: 0 })
 
   useLayoutEffect(() => {
-    if (selectedRef.current || !group.current) return
-    group.current.quaternion.setFromAxisAngle(AXIS_X, -0.28)
+    group.current?.quaternion.copy(OPENING)
   }, [])
+
+  const stop = () => {
+    idle.current = 0
+    velocity.current.x = 0
+    velocity.current.y = 0
+  }
 
   useEffect(() => {
     const destination = destinations.find((item) => item.id === selectedId)
     if (!destination || !group.current) return
-    NORMAL.set(destination.position[0], destination.position[1], destination.position[2]).normalize()
-    target.current.setFromUnitVectors(NORMAL, FOCUS)
-    mode.current = 'focus'
-    idle.current = 0
-    angular.current.x = 0
-    angular.current.y = 0
+    target.current = facing(group.current.quaternion, destination.position)
+    stop()
   }, [selectedId])
 
   useEffect(() => {
-    const focus = (position: Vec3) => {
-      NORMAL.set(position[0], position[1], position[2]).normalize()
-      target.current.setFromUnitVectors(NORMAL, FOCUS)
-      mode.current = 'focus'
-      idle.current = 0
-      angular.current.x = 0
-      angular.current.y = 0
+    globeApi.focus = (position: Vec3) => {
+      if (!group.current) return
+      target.current = facing(group.current.quaternion, position)
+      stop()
     }
-    globeApi.focus = focus
     globeApi.reset = () => {
-      target.current.identity()
-      mode.current = 'focus'
+      target.current = OPENING.clone()
       distance.current = CAMERA_DEFAULT
-      idle.current = 0
-      angular.current.x = 0
-      angular.current.y = 0
+      stop()
     }
     globeApi.zoomBy = (delta) => {
       distance.current = clamp(distance.current + delta, CAMERA_MIN, CAMERA_MAX)
     }
     globeApi.nudge = (dx, dy) => {
       if (!group.current) return
-      mode.current = 'free'
-      idle.current = 0
-      spin(group.current.quaternion, dx * DRAG, dy * DRAG)
+      target.current = null
+      stop()
+      roll(group.current.quaternion, camera, dx, dy)
     }
     return () => {
       globeApi.focus = () => {}
@@ -97,15 +97,12 @@ function GlobeRig({
       globeApi.zoomBy = () => {}
       globeApi.nudge = () => {}
     }
-  }, [])
-
-  useEffect(() => {
-    selectedRef.current = selectedId
-  }, [selectedId])
+  }, [camera])
 
   useEffect(() => {
     const element = getThree().gl.domElement
     element.dataset.globe = 'true'
+    // One finger turns the globe and two pinch-zoom; the page itself never scrolls here.
     element.style.touchAction = 'none'
     setGlobeCursor('grab')
     const pointers = new Map<number, { x: number; y: number }>()
@@ -119,8 +116,8 @@ function GlobeRig({
       element.setPointerCapture(event.pointerId)
       if (pointers.size === 1) {
         dragging.current = true
-        mode.current = 'free'
-        idle.current = 0
+        target.current = null
+        stop()
         lastX = event.clientX
         lastY = event.clientY
         lastTime = performance.now()
@@ -138,6 +135,7 @@ function GlobeRig({
         const span = Math.hypot(a.x - b.x, a.y - b.y)
         if (pinch > 0) {
           distance.current = clamp(distance.current + (pinch - span) * 0.012, CAMERA_MIN, CAMERA_MAX)
+          pointerTravel.distance += Math.abs(pinch - span)
         }
         pinch = span
         return
@@ -151,9 +149,12 @@ function GlobeRig({
       lastY = event.clientY
       lastTime = now
       pointerTravel.distance += Math.hypot(dx, dy)
-      spin(group.current.quaternion, dx * DRAG, dy * DRAG)
-      angular.current.x = clamp((dx * DRAG) / dt, -2.4, 2.4)
-      angular.current.y = clamp((dy * DRAG) / dt, -2.4, 2.4)
+      roll(group.current.quaternion, camera, dx, dy)
+      // Pixels per second, capped so a hard flick still settles quickly.
+      const cap = 2.4 / DRAG
+      velocity.current.x = clamp(dx / dt, -cap, cap)
+      velocity.current.y = clamp(dy / dt, -cap, cap)
+      idle.current = 0
     }
     const onUp = (event: PointerEvent) => {
       pointers.delete(event.pointerId)
@@ -161,6 +162,17 @@ function GlobeRig({
         dragging.current = false
         pinch = 0
         setGlobeCursor('grab')
+        return
+      }
+      // One finger left after a pinch: carry on dragging from where it is now, without a jump.
+      const [rest] = [...pointers.values()]
+      if (rest) {
+        lastX = rest.x
+        lastY = rest.y
+        lastTime = performance.now()
+        pinch = 0
+        velocity.current.x = 0
+        velocity.current.y = 0
       }
     }
     const onWheel = (event: WheelEvent) => {
@@ -183,30 +195,35 @@ function GlobeRig({
       element.removeEventListener('wheel', onWheel)
       element.removeEventListener('contextmenu', onContext)
     }
-  }, [getThree])
+  }, [getThree, camera])
 
   useFrame((_, delta) => {
     const globe = group.current
     if (!globe) return
     const step = Math.min(delta, 0.05)
-    if (mode.current === 'focus') {
-      const amount = reduced ? 1 : 1 - Math.exp(-5 * step)
-      globe.quaternion.slerp(target.current, amount)
-      if (globe.quaternion.angleTo(target.current) < 0.004) mode.current = 'free'
+    if (target.current) {
+      // Ease along the shortest arc toward the chosen orientation.
+      globe.quaternion.slerp(target.current, reduced ? 1 : 1 - Math.exp(-5 * step))
+      if (globe.quaternion.angleTo(target.current) < 0.004) {
+        globe.quaternion.copy(target.current)
+        target.current = null
+      }
     } else if (!dragging.current) {
-      const speed = Math.hypot(angular.current.x, angular.current.y)
-      if (speed > 0.02) {
-        spin(globe.quaternion, angular.current.x * step, angular.current.y * step)
+      const speed = Math.hypot(velocity.current.x, velocity.current.y)
+      if (speed * DRAG > 0.02) {
+        roll(globe.quaternion, camera, velocity.current.x * step, velocity.current.y * step)
         const decay = Math.exp(-2.3 * step)
-        angular.current.x *= decay
-        angular.current.y *= decay
+        velocity.current.x *= decay
+        velocity.current.y *= decay
         idle.current = 0
       } else {
-        angular.current.x = 0
-        angular.current.y = 0
+        velocity.current.x = 0
+        velocity.current.y = 0
         idle.current += step
-        if (!reduced && !selectedRef.current && idle.current > 2.4) {
-          spin(globe.quaternion, step * 0.09, 0)
+        // Turn on the planet's own polar axis, wherever it points. Never snaps back upright.
+        // The speed is the viewer's explicit choice, so it applies even with reduced motion.
+        if (idle.current > IDLE_DELAY && spinRef.current > 0) {
+          spinOnAxis(globe.quaternion, step * AUTO_SPIN * spinRef.current)
         }
       }
     }
@@ -223,7 +240,7 @@ export function GlobeScene({
   hoveredId,
   filter,
   reduced,
-  wide,
+  spin,
   onSelect,
   onHover,
 }: {
@@ -231,7 +248,7 @@ export function GlobeScene({
   hoveredId: string | null
   filter: DestinationFilter
   reduced: boolean
-  wide: boolean
+  spin: number
   onSelect: (id: string) => void
   onHover: (id: string | null) => void
 }) {
@@ -254,12 +271,17 @@ export function GlobeScene({
         </mesh>
       </group>
       <Atmosphere />
-      <GlobeRig selectedId={selectedId} reduced={reduced}>
+      <GlobeRig selectedId={selectedId} reduced={reduced} spin={spin}>
         <Ocean />
-        <Clouds reduced={reduced} />
-        <Graticule />
+        <Land />
+        <ProgrammingLetters />
+        <ProgrammingScenery />
+        <NorthPoleLandmark reduced={reduced} />
+        <SouthPoleLandmark reduced={reduced} />
+        <SmileScenery />
+        <Clouds reduced={reduced} selectedId={selectedId} />
         {scenery.map((islet) => (
-          <Islet key={islet.id} position={islet.position} seed={islet.seed} land={islet.land} sand={islet.sand} />
+          <Islet key={islet.id} position={islet.position} seed={islet.seed} />
         ))}
         {destinations.map((destination) => (
           <DestinationMarker
@@ -269,7 +291,6 @@ export function GlobeScene({
             hovered={destination.id === hoveredId}
             dimmed={!matchesFilter(destination.kind, filter)}
             reduced={reduced}
-            wide={wide}
             onSelect={onSelect}
             onHover={onHover}
           />

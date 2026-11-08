@@ -1,6 +1,17 @@
 import type { ReactNode } from 'react'
+import {
+  DreamsIsland,
+  IslaSorna,
+  LeafVillage,
+  MysteryIsland,
+  RainIsland,
+  SandIsland,
+  SemiconductorLand,
+  SoundIsland,
+  SssTierLands,
+} from '@/globe/realms.tsx'
 
-function Solid({
+export function Solid({
   color,
   emissive = '#000000',
   emissiveIntensity = 0,
@@ -630,8 +641,26 @@ function VioletGate({ accent }: { accent: string }) {
   )
 }
 
-export function Landmark({ id, accent }: { id: string; accent: string }) {
+export function Landmark({ id, accent, reduced }: { id: string; accent: string; reduced: boolean }) {
   switch (id) {
+    case 'leaf-village':
+      return <LeafVillage accent={accent} reduced={reduced} />
+    case 'rain-island':
+      return <RainIsland accent={accent} reduced={reduced} />
+    case 'sound-island':
+      return <SoundIsland accent={accent} reduced={reduced} />
+    case 'sand-island':
+      return <SandIsland accent={accent} reduced={reduced} />
+    case 'mystery-island':
+      return <MysteryIsland accent={accent} reduced={reduced} />
+    case 'dreams-and-aspiration':
+      return <DreamsIsland accent={accent} reduced={reduced} />
+    case 'semiconductor-land':
+      return <SemiconductorLand accent={accent} reduced={reduced} />
+    case 'sss-tier-lands':
+      return <SssTierLands accent={accent} reduced={reduced} />
+    case 'isla-sorna':
+      return <IslaSorna accent={accent} reduced={reduced} />
     case 'philippines':
       return <Philippines accent={accent} />
     case 'canada':
