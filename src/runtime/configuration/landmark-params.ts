@@ -165,6 +165,8 @@ export type GroveParams = z.output<typeof Grove>
 export const ComponentProps = {
   SelectionChip: z.strictObject({ readMore: z.boolean().optional() }),
   ShoreLegend: z.strictObject({}),
+  /** The collapsible list of places. `defaultOpen` starts it expanded. */
+  LocationLegend: z.strictObject({ defaultOpen: z.boolean().optional() }),
   GlobeControls: z.strictObject({
     showSpeed: z.boolean().optional(),
     showZoom: z.boolean().optional(),

@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 import './setup.tsx'
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, test } from 'vitest'
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+import { navigation } from '@/state/navigation.ts'
 import type { CompiledSection } from '@/runtime/configuration/registry-types.ts'
 import { TextProvider } from '@/runtime/localization/index.tsx'
 import { world } from '@/runtime/world-registry/index.ts'
@@ -21,7 +22,10 @@ function Providers({ children, locale = 'en' }: { children: ReactNode; locale?: 
   )
 }
 
-beforeEach(() => window.history.replaceState(null, '', '/'))
+beforeEach(() => {
+  window.history.replaceState(null, '', '/')
+  window.localStorage.clear()
+})
 afterEach(cleanup)
 
 describe('the configured layout', () => {
@@ -141,6 +145,135 @@ describe('content loading', () => {
     const japan = world.locations.find((location) => location.id === 'japan')!
     expect(japan.sections).toEqual([{ id: 'overview', display: 'article', order: 10, title: 'About Japan', titleKey: null }])
     expect(JSON.stringify(world)).not.toContain('vermilion gate')
+  })
+})
+
+describe('the places legend', () => {
+  beforeEach(() => window.localStorage.clear())
+
+  test('starts collapsed, opens to list every place by category, and remembers', () => {
+    const { unmount } = render(<Providers><Explorer /></Providers>)
+    const toggle = screen.getByRole('button', { name: 'Show the list of places' })
+    expect(toggle.getAttribute('aria-expanded')).toBe('false')
+    fireEvent.click(toggle)
+    const list = screen.getByRole('navigation', { name: 'Places' })
+    for (const heading of ['Places', 'Projects', 'Realms', 'Uncharted']) {
+      expect(within(list).getByRole('heading', { name: heading })).toBeTruthy()
+    }
+    expect(within(list).getAllByRole('button')).toHaveLength(24)
+    unmount()
+    render(<Providers><Explorer /></Providers>)
+    expect(screen.getByRole('button', { name: 'Hide the list of places' }).getAttribute('aria-expanded')).toBe('true')
+  })
+
+  test('choosing a place selects it and turns the globe to it, without entering', () => {
+    const go = vi.spyOn(navigation, 'go').mockImplementation(() => {})
+    const japan = world.locations.find((location) => location.id === 'japan')!
+    japan.entry = { type: 'url', href: './worlds/japan/', openIn: 'same-tab', transition: 'dive', labelKey: null }
+    try {
+      render(<Providers><Explorer /></Providers>)
+      fireEvent.click(screen.getByRole('button', { name: 'Show the list of places' }))
+      fireEvent.click(within(screen.getByRole('navigation', { name: 'Places' })).getByRole('button', { name: /^Japan/ }))
+      expect(window.location.hash).toBe('#japan')
+      expect(go).not.toHaveBeenCalled()
+    } finally {
+      japan.entry = null
+      go.mockRestore()
+    }
+  })
+})
+
+describe('entering a world', () => {
+  afterEach(() => vi.useRealTimers())
+
+  test('a place without an entry has no Enter button, and entering does nothing', () => {
+    const go = vi.spyOn(navigation, 'go').mockImplementation(() => {})
+    let entered: boolean | null = null
+    function Probe() {
+      const { enter } = useExplorer()
+      return <button type="button" onClick={() => (entered = enter('canada'))}>try canada</button>
+    }
+    render(<Providers><Explorer /><Probe /></Providers>)
+    fireEvent.click(screen.getByRole('button', { name: 'Canada' }))
+    expect(screen.queryByRole('button', { name: /^Enter / })).toBeNull()
+    fireEvent.click(screen.getByText('try canada'))
+    expect(entered).toBe(false)
+    expect(go).not.toHaveBeenCalled()
+    go.mockRestore()
+  })
+
+  test('a place with an entry dives, fades, then opens its world', () => {
+    vi.useFakeTimers()
+    const go = vi.spyOn(navigation, 'go').mockImplementation(() => {})
+    const crislab = world.locations.find((location) => location.id === 'crislab')!
+    crislab.entry = { type: 'url', href: './worlds/crislab/', openIn: 'same-tab', transition: 'dive', labelKey: null }
+    try {
+      render(<Providers><Explorer /></Providers>)
+      fireEvent.click(screen.getByRole('button', { name: 'CrisLab' }))
+      fireEvent.click(screen.getByRole('button', { name: 'Enter CrisLab' }))
+      expect(screen.getByRole('status').textContent).toBe('Entering CrisLab…')
+      expect(go).not.toHaveBeenCalled()
+      vi.advanceTimersByTime(world.settings.controls.entryTransition.durationMs)
+      expect(go).toHaveBeenCalledWith(new URL('./worlds/crislab/', window.location.href).toString())
+    } finally {
+      crislab.entry = null
+      go.mockRestore()
+    }
+  })
+
+  test('a new-tab entry opens at once and leaves the globe where it is', () => {
+    const open = vi.spyOn(navigation, 'open').mockImplementation(() => {})
+    const marketlab = world.locations.find((location) => location.id === 'marketlab')!
+    marketlab.entry = { type: 'url', href: 'https://example.com/marketlab', openIn: 'new-tab', transition: 'dive', labelKey: null }
+    try {
+      render(<Providers><Explorer /></Providers>)
+      fireEvent.click(screen.getByRole('button', { name: 'MarketLab' }))
+      fireEvent.click(screen.getByRole('button', { name: 'Enter MarketLab' }))
+      expect(open).toHaveBeenCalledWith('https://example.com/marketlab')
+      expect(screen.queryByText(/^Entering/)).toBeNull()
+    } finally {
+      marketlab.entry = null
+      open.mockRestore()
+    }
+  })
+})
+
+describe('backdrop planets', () => {
+  afterEach(() => vi.useRealTimers())
+
+  function EnterProbe({ id, onResult }: { id: string; onResult: (entered: boolean) => void }) {
+    const { enter } = useExplorer()
+    return <button type="button" onClick={() => onResult(enter(id))}>enter {id}</button>
+  }
+
+  test('clicking a planet without an entry does nothing', () => {
+    const go = vi.spyOn(navigation, 'go').mockImplementation(() => {})
+    let result: boolean | null = null
+    render(<Providers><Explorer /><EnterProbe id="mars" onResult={(entered) => (result = entered)} /></Providers>)
+    fireEvent.click(screen.getByText('enter mars'))
+    expect(result).toBe(false)
+    expect(screen.queryByText(/^Entering/)).toBeNull()
+    expect(go).not.toHaveBeenCalled()
+    go.mockRestore()
+  })
+
+  test('a planet with an entry fades, then opens its world', () => {
+    vi.useFakeTimers()
+    const go = vi.spyOn(navigation, 'go').mockImplementation(() => {})
+    const mars = world.backdrop.find((planet) => planet.id === 'mars')!
+    mars.entry = { type: 'url', href: './worlds/mars/', openIn: 'same-tab', transition: 'dive', labelKey: null }
+    try {
+      render(<Providers><Explorer /><EnterProbe id="mars" onResult={() => {}} /></Providers>)
+      fireEvent.click(screen.getByText('enter mars'))
+      expect(screen.getByRole('status').textContent).toBe('Entering Mars…')
+      vi.advanceTimersByTime(world.settings.controls.entryTransition.durationMs)
+      expect(go).toHaveBeenCalledWith(new URL('./worlds/mars/', window.location.href).toString())
+      // A planet is not a shore: entering it selects nothing on the globe.
+      expect(window.location.hash).toBe('')
+    } finally {
+      mars.entry = null
+      go.mockRestore()
+    }
   })
 })
 

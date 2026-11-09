@@ -64,6 +64,10 @@
         "categories": {
           "type": "string",
           "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "backdrop": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
         }
       },
       "required": [
@@ -73,7 +77,8 @@
         "environment",
         "features",
         "discovery",
-        "categories"
+        "categories",
+        "backdrop"
       ],
       "additionalProperties": false
     },

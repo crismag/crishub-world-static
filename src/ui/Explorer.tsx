@@ -45,7 +45,7 @@ function cameraPosition(): [number, number, number] {
  */
 export function Explorer() {
   const { t } = useText()
-  const { ready, setReady, select, choose, setPanelOpen } = useExplorer()
+  const { ready, setReady, select, choose, setPanelOpen, entering } = useExplorer()
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
@@ -147,6 +147,20 @@ export function Explorer() {
       </div>
       <Panel side="left" panel={layout.leftPanel} />
       <Panel side="right" panel={layout.rightPanel} />
+
+      {/* While diving into a location's world, the page fades out over the dive. */}
+      <div
+        aria-hidden={!entering}
+        className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-background opacity-0 transition-opacity ease-in data-[entering=true]:pointer-events-auto data-[entering=true]:opacity-100"
+        data-entering={entering ? 'true' : 'false'}
+        style={{ transitionDuration: `${controls.entryTransition.durationMs}ms` }}
+      >
+        {entering && (
+          <p role="status" className="font-heading text-sm text-muted-foreground">
+            {t(UI.entering, { name: t(entering.nameKey) })}
+          </p>
+        )}
+      </div>
     </main>
   )
 }

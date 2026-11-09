@@ -7,6 +7,7 @@
       { "id": "selection", "component": "SelectionChip", "order": 20, "visible": true, "props": { "readMore": true } }
     ],
     "bottomLeft": [
+      { "id": "places", "component": "LocationLegend", "order": 5, "visible": true, "props": { "defaultOpen": false } },
       { "id": "legend", "component": "ShoreLegend", "order": 10, "visible": true, "props": {} }
     ],
     "bottomRight": [

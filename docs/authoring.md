@@ -211,6 +211,7 @@ Edit `world/layouts/explorer.json`.
 | Component | Props |
 |---|---|
 | `SelectionChip` | `readMore` |
+| `LocationLegend` | `defaultOpen` |
 | `ShoreLegend` | — |
 | `GlobeControls` | `showSpeed`, `showZoom`, `showReset` |
 | `DestinationDetails` | — |
@@ -304,7 +305,59 @@ Edit `world/formations/smiling-hemisphere.json`.
 
 The optional "The world is smiling at you." line is `settings/discovery.json` → `smileGreeting.enabled` (off by default).
 
-## 15. Validate
+## 15. Give a location a world to enter
+
+Add an `entry` to its `location.json`:
+
+```json
+"entry": {
+  "type": "url",
+  "href": "./worlds/crislab/",
+  "openIn": "same-tab",
+  "transition": "dive",
+  "labelKey": null
+}
+```
+
+Clicking the island on the globe then enters that world; so does the **Enter** button on its selection chip, for keyboard and screen-reader users. Choosing it from the Places legend only turns the globe to it.
+
+| Field | Values |
+|---|---|
+| `href` | A path on this site (`./worlds/crislab/`, `/worlds/crislab/`) or an `https://` address. Scripts, other schemes, and `//` links are refused |
+| `openIn` | `same-tab` leaves the globe for the world. `new-tab` opens it beside the globe, at once and without a transition |
+| `transition` | `dive`: the globe turns the island to the front, the camera swoops down, and the screen fades before the world opens. `none` opens it straight away. Visitors who prefer reduced motion always get `none` |
+| `labelKey` | Optional text key for the Enter button, such as `"Step into {name}"`. Defaults to "Enter {name}" |
+
+**Without an `entry`,** clicking the island only selects it, as before. The dive's length and depth are `entryTransition` in `settings/controls.json`.
+
+On static hosting, a world is a folder of its own beside the globe, such as `worlds/crislab/index.html` in the upload. Coming back with the browser's Back button returns to the globe as it was.
+
+## 16. Distant planets in the background
+
+The tiny planets far behind the globe (Mars and Jupiter to start) are scenery: they stay put while the globe turns, and show their name on hover. They live in `world/settings/backdrop.json`:
+
+```json
+{
+  "id": "mars",
+  "nameKey": "planet.mars.name",
+  "position": [5, 9, -48],
+  "radius": 1,
+  "spin": 0.08,
+  "tiltDeg": 25,
+  "look": { "type": "painted", "style": "rocky", "colors": ["#e0794a", "#c1552f", "#8e3b22"], "ring": false, "seed": 7 },
+  "entry": null
+}
+```
+
+- **`position`** is in globe units. The camera looks from +z toward the center, so far behind means a large negative `z`. Planets closer than four globe radii are refused.
+- **`look`** is either:
+  - `painted`: `banded` for a gas giant with belts and a storm, or `rocky` for a dusty world with ice caps; with a few `colors`, an optional `ring`, and a `seed`
+  - `image`: an `assetId` from the asset manifest, shown as a flat disc
+- **`entry`** works exactly like a location's (section 15). With one, clicking the planet fades the screen and opens its world. With `null`, clicking does nothing.
+
+Rename a planet in the locale files (`planet.mars.name`). Turn them all off with `settings/features.json` → `backdropPlanets`.
+
+## 17. Validate
 
 ```bash
 npm run world:validate   # every file, every reference, and the geography
@@ -313,7 +366,7 @@ npm run assets:audit     # asset files, formats, sizes, names, licenses
 
 Both exit with an error if anything is wrong. Warnings, such as an unused text key or a translation falling back to English, do not fail them.
 
-## 16. Build
+## 18. Build
 
 ```bash
 npm run world:build   # writes src/generated/world.json and schemas/

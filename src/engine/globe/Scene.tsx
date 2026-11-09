@@ -7,6 +7,7 @@ import { features } from '@/runtime/features/index.ts'
 import { centerOf, getLocation, globeLocations, settings } from '@/runtime/world-registry/index.ts'
 import { useExplorer } from '@/state/explorer.tsx'
 import { orientation } from '@/engine/controls/globe-orientation.ts'
+import { Backdrop } from '@/engine/globe/Backdrop.tsx'
 import { Formations } from '@/engine/globe/Formations.tsx'
 import { LocationNode } from '@/engine/globe/LocationNode.tsx'
 import { Atmosphere, Clouds, Land, Ocean } from '@/engine/globe/Planet.tsx'
@@ -78,6 +79,13 @@ function GlobeRig({ children }: { children: ReactNode }) {
       stop()
     }
     globeApi.zoomBy = (delta) => zoomTo(distance.current + delta)
+    globeApi.dive = (position: Vec3) => {
+      if (!group.current) return
+      target.current = orientation.facing(group.current.quaternion, position)
+      // Closer than the zoom limit allows: this is a transition, not a resting view.
+      distance.current = controls.entryTransition.diveDistance
+      stop()
+    }
     globeApi.nudge = (dx, dy) => {
       if (!group.current) return
       target.current = null
@@ -89,6 +97,7 @@ function GlobeRig({ children }: { children: ReactNode }) {
       globeApi.reset = () => {}
       globeApi.zoomBy = () => {}
       globeApi.nudge = () => {}
+      globeApi.dive = () => {}
     }
   }, [camera, opening])
 
@@ -264,6 +273,7 @@ export function GlobeScene() {
           <meshBasicMaterial color={sun.glow} transparent opacity={0.16} depthWrite={false} />
         </mesh>
       </group>
+      {features.backdropPlanets && <Backdrop />}
       <Atmosphere />
       <GlobeRig>
         <Ocean />

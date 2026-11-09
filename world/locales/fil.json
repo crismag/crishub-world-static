@@ -38,5 +38,13 @@
   "location.south-pole.description": "Sa ilalim ng nagyeyelong gilid ng Crishub World, may sinaunang hiwagang naghihintay na matuklasan.",
   "ui.panel.loading": "Naglo-load…",
   "ui.panel.failed": "Hindi ma-load ang sulating ito. Suriin ang iyong koneksiyon at subukang muli.",
-  "ui.panel.retry": "Subukang muli"
+  "ui.panel.retry": "Subukang muli",
+  "ui.places.title": "Mga Lugar",
+  "ui.places.show": "Ipakita ang listahan ng mga lugar",
+  "ui.places.hide": "Itago ang listahan ng mga lugar",
+  "ui.places.enterable": "May mundong mapapasok",
+  "ui.entry.enter": "Pumasok sa {name}",
+  "ui.entry.entering": "Pumapasok sa {name}…",
+  "planet.jupiter.name": "Hupiter",
+  "planet.mars.name": "Marte"
 }

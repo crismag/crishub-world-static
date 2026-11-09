@@ -17,6 +17,7 @@ import {
   AnnouncementsFile,
   AssetManifest,
   CameraSettings,
+  BackdropSettings,
   CategoriesFile,
   ContentFrontMatter,
   ControlsSettings,
@@ -159,6 +160,8 @@ export function compileWorld(worldDir: string, projectDir = resolve(worldDir, '.
   const environment = load(at(worldFile, world.settings.environment), EnvironmentSettings)
   const features = load(at(worldFile, world.settings.features), FeatureSettings)
   const discovery = load(at(worldFile, world.settings.discovery), DiscoverySettings)
+  const backdropFile = at(worldFile, world.settings.backdrop)
+  const backdropSettings = load(backdropFile, BackdropSettings)
   const categoriesFile = at(worldFile, world.settings.categories)
   const categories = load(categoriesFile, CategoriesFile)
   const explorerFile = at(worldFile, world.layouts.explorer)
@@ -372,6 +375,10 @@ export function compileWorld(worldDir: string, projectDir = resolve(worldDir, '.
     }
     if (!categoryIds.has(location.category)) error(locationFile, `unknown category "${location.category}"`)
     for (const key of [location.display.nameKey, location.display.shortNameKey, location.display.descriptionKey]) needText(locationFile, key)
+    if (location.entry) {
+      needText(locationFile, location.entry.labelKey)
+      if (!location.interaction.selectable) warn(locationFile, 'has an entry but is not selectable, so visitors cannot click it to enter')
+    }
 
     const position = fromLatLon(location.placement.latitude, location.placement.longitude)
     const scale = location.placement.scale
@@ -487,6 +494,7 @@ export function compileWorld(worldDir: string, projectDir = resolve(worldDir, '.
       tags: location.tags,
       parent: location.parent,
       related: location.related,
+      entry: location.entry ?? null,
     })
   }
   const locationIds = new Set(locations.map((location) => location.id))
@@ -593,6 +601,31 @@ export function compileWorld(worldDir: string, projectDir = resolve(worldDir, '.
     })
   }
 
+  // ── Backdrop planets ──
+  const backdrop: WorldRegistry['backdrop'] = []
+  for (const planet of backdropSettings?.planets ?? []) {
+    claimId(backdropFile, planet.id)
+    needText(backdropFile, planet.nameKey)
+    if (planet.entry) needText(backdropFile, planet.entry.labelKey)
+    if (Math.hypot(...planet.position) < (globe?.radius ?? 4) * 4) {
+      error(backdropFile, `planet "${planet.id}" is too close to the globe; keep it far in the background`)
+    }
+    const look: WorldRegistry['backdrop'][number]['look'] =
+      planet.look.type === 'image'
+        ? { type: 'image', assetPath: needAsset(backdropFile, planet.look.assetId, ['image', 'texture']) ?? '' }
+        : planet.look
+    backdrop.push({
+      id: planet.id,
+      nameKey: planet.nameKey,
+      position: planet.position,
+      radius: planet.radius,
+      spin: planet.spin,
+      tilt: planet.tiltDeg * DEG,
+      look,
+      entry: planet.entry,
+    })
+  }
+
   // ── Layouts and navigation ──
   const sectionsOf = (layout: z.output<typeof ExplorerLayout>) => [
     ...layout.regions.top,
@@ -691,7 +724,7 @@ export function compileWorld(worldDir: string, projectDir = resolve(worldDir, '.
   }
 
   const failed = diagnostics.some((diagnostic) => diagnostic.level === 'error')
-  if (failed || !globe || !camera || !controls || !environment || !features || !discovery || !categories || !explorer || !destinationPanel || !navigation || !messages || !theme) {
+  if (failed || !backdropSettings || !globe || !camera || !controls || !environment || !features || !discovery || !categories || !explorer || !destinationPanel || !navigation || !messages || !theme) {
     return { registry: null, diagnostics }
   }
   const strip = <T extends { schemaVersion: number }>({ schemaVersion: _version, ...rest }: T) => rest
@@ -714,6 +747,7 @@ export function compileWorld(worldDir: string, projectDir = resolve(worldDir, '.
         discovery: strip(discovery),
       },
       categories: [...categories.categories].sort((a, b) => a.order - b.order),
+      backdrop,
       locations,
       formations,
       layouts: { explorer, destinationPanel: strip(destinationPanel), navigation: strip(navigation) },

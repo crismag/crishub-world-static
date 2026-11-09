@@ -28,6 +28,11 @@ export function categoryOf(id: string) {
   return world.categories.find((category) => category.id === id)
 }
 
+/** A distant backdrop planet, by ID. */
+export function getBackdropPlanet(id: string) {
+  return world.backdrop.find((planet) => planet.id === id)
+}
+
 export function getFormation(id: string): CompiledFormation | undefined {
   return world.formations.find((formation) => formation.id === id)
 }

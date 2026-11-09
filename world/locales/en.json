@@ -94,6 +94,8 @@
   "location.violet-gate.name": "Violet Gate",
   "location.violet-gate.short": "Violet Gate",
   "panel.empty": "Nothing has been written about this shore yet.",
+  "planet.jupiter.name": "Jupiter",
+  "planet.mars.name": "Mars",
   "ui.announcement.dismiss": "Dismiss",
   "ui.chip.close": "Close {name}",
   "ui.chip.read": "Read",
@@ -105,6 +107,8 @@
   "ui.controls.zoom-in": "Zoom in",
   "ui.controls.zoom-out": "Zoom out",
   "ui.directory.title": "Shores",
+  "ui.entry.enter": "Enter {name}",
+  "ui.entry.entering": "Entering {name}…",
   "ui.error.webgl-body": "This browser could not create a WebGL scene, so there is no planet to explore here.",
   "ui.error.webgl-title": "The globe could not start",
   "ui.globe.label": "Crishub World globe. Drag to rotate, scroll or pinch to zoom, or choose a shore from the list.",
@@ -114,6 +118,10 @@
   "ui.panel.failed": "This writeup could not be loaded. Check your connection and try again.",
   "ui.panel.loading": "Loading…",
   "ui.panel.retry": "Try again",
+  "ui.places.enterable": "Has a world to enter",
+  "ui.places.hide": "Hide the list of places",
+  "ui.places.show": "Show the list of places",
+  "ui.places.title": "Places",
   "world.description": "Crishub World is a miniature planet. Spin the globe to visit countries, project worlds, and shores that are still uncharted.",
   "world.name": "Crishub World"
 }

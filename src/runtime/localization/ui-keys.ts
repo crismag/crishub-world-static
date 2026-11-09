@@ -23,6 +23,12 @@ export const UI = {
   contentLoading: 'ui.panel.loading',
   contentFailed: 'ui.panel.failed',
   retry: 'ui.panel.retry',
+  placesTitle: 'ui.places.title',
+  placesShow: 'ui.places.show',
+  placesHide: 'ui.places.hide',
+  placesEnterable: 'ui.places.enterable',
+  enter: 'ui.entry.enter',
+  entering: 'ui.entry.entering',
 } as const
 
 export const UI_KEYS: readonly string[] = Object.values(UI)

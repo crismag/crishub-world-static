@@ -6,6 +6,9 @@
       "type": "number",
       "const": 1
     },
+    "backdropPlanets": {
+      "type": "boolean"
+    },
     "clouds": {
       "type": "boolean"
     },
@@ -27,6 +30,7 @@
   },
   "required": [
     "schemaVersion",
+    "backdropPlanets",
     "clouds",
     "stars",
     "formations",

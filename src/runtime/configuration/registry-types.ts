@@ -113,6 +113,8 @@ export type CompiledLocation<Section = CompiledSection> = {
   tags: string[]
   parent: string | null
   related: string[]
+  /** The world this location opens into, or null to only select it. */
+  entry: WorldEntry | null
 }
 
 export type CompiledFormationIsland = {
@@ -138,6 +140,21 @@ export type CompiledFormation = {
   frame: { east: Vec3; north: Vec3 } | null
 }
 
+export type WorldEntry = { type: 'url'; href: string; openIn: 'same-tab' | 'new-tab'; transition: 'dive' | 'none'; labelKey: string | null }
+
+export type BackdropPlanet = {
+  id: string
+  nameKey: string
+  position: Vec3
+  radius: number
+  spin: number
+  tilt: number
+  look:
+    | { type: 'painted'; style: 'banded' | 'rocky'; colors: string[]; ring: boolean; seed: number }
+    | { type: 'image'; assetPath: string }
+  entry: WorldEntry | null
+}
+
 export type CompiledAsset = { id: string; type: string; path: string; displayName: string }
 
 export type WorldRegistry<Section = CompiledSection> = {
@@ -153,6 +170,8 @@ export type WorldRegistry<Section = CompiledSection> = {
   }
   categories: Without<z.infer<typeof CategoriesFile>>['categories']
   locations: CompiledLocation<Section>[]
+  /** Distant planets behind the globe. */
+  backdrop: BackdropPlanet[]
   formations: CompiledFormation[]
   layouts: {
     explorer: ExplorerLayoutT

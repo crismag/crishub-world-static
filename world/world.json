@@ -13,7 +13,8 @@
     "environment": "settings/environment.json",
     "features": "settings/features.json",
     "discovery": "settings/discovery.json",
-    "categories": "settings/categories.json"
+    "categories": "settings/categories.json",
+    "backdrop": "settings/backdrop.json"
   },
   "locations": "locations/index.json",
   "formations": "formations/index.json",

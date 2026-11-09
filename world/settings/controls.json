@@ -7,6 +7,7 @@
   "zoom": { "wheelSensitivity": 0.0035, "pinchSensitivity": 0.012, "buttonStep": 0.55 },
   "keyboard": { "enabled": true, "rotateStepPx": [48, 36], "zoomStep": 0.45 },
   "clickTolerancePx": 8,
+  "entryTransition": { "durationMs": 1100, "diveDistance": 4.9 },
   "autoRotate": {
     "enabled": true,
     "radiansPerSecond": 0.1,

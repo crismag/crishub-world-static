@@ -108,6 +108,25 @@
       "minimum": 0,
       "maximum": 50
     },
+    "entryTransition": {
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "type": "integer",
+          "minimum": 200,
+          "maximum": 4000
+        },
+        "diveDistance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "durationMs",
+        "diveDistance"
+      ],
+      "additionalProperties": false
+    },
     "autoRotate": {
       "type": "object",
       "properties": {
@@ -162,6 +181,7 @@
     "zoom",
     "keyboard",
     "clickTolerancePx",
+    "entryTransition",
     "autoRotate",
     "respectReducedMotion"
   ],

@@ -12,7 +12,9 @@ The first playable slice is the Interactive Globe Explorer: one rotating world w
 - Choosing a shore turns the globe the short way round to bring it to the front. Reset returns to the opening view. Both poles are capped with ice and can be turned to face you.
 - The globe opens fully zoomed out. Scroll, pinch, or use the small zoom buttons to lean closer.
 - Click a landmark to select it. Its name shows in a small chip at the top. The world is the menu.
-- The small legend at the bottom left lights up one kind of shore at a time.
+- The **Places** list at the bottom left opens to show every place by category. Choosing one turns the globe to it. Below it, the small legend lights up one kind of shore at a time.
+- Two tiny planets hang far behind the globe. Hover one for its name; a planet with a world of its own opens it when clicked.
+- Some places have a world of their own. Click the island itself (or **Enter** on its chip) to dive in. Places without one are simply selected.
 - Arrow keys turn the globe. `+` and `-` zoom. Escape leaves the shore you are reading.
 - A selected shore can be shared with its hash, for example `#japan` or `#crislab`.
 

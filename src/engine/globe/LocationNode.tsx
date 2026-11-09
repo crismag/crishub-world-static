@@ -60,7 +60,7 @@ function relativeTo(parent: Pose, child: Pose) {
 
 export function LocationNode({ location }: { location: RuntimeLocation }) {
   const { t } = useText()
-  const { selectedId, hoveredId, filter, reduced, setHoveredId, choose } = useExplorer()
+  const { selectedId, hoveredId, filter, reduced, setHoveredId, choose, enter } = useExplorer()
   const groupRef = useRef<THREE.Group>(null)
   const labelRef = useRef<HTMLDivElement>(null)
   const beaconRef = useRef<THREE.Mesh>(null)
@@ -175,7 +175,8 @@ export function LocationNode({ location }: { location: RuntimeLocation }) {
             onClick={(event) => {
               event.stopPropagation()
               if (pointerTravel.distance > settings.controls.clickTolerancePx) return
-              choose(location.id)
+              // Clicking the island enters its world when it has one; otherwise it just selects it.
+              if (!enter(location.id)) choose(location.id)
             }}
           >
             <sphereGeometry args={[radius, 16, 12]} />

@@ -49,6 +49,7 @@ export const WorldFile = z.strictObject({
     features: ConfigPath,
     discovery: ConfigPath,
     categories: ConfigPath,
+    backdrop: ConfigPath,
   }),
   locations: ConfigPath,
   formations: ConfigPath,
@@ -135,6 +136,12 @@ export const ControlsSettings = z.strictObject({
   }),
   /** A press that moves more than this many pixels is a drag, not a click. */
   clickTolerancePx: z.number().min(0).max(50),
+  /** The dive into a location's world (locations with an `entry` using `transition: "dive"`). */
+  entryTransition: z.strictObject({
+    durationMs: z.number().int().min(200).max(4000),
+    /** How close the camera swoops, in globe units from the center. */
+    diveDistance: z.number().positive(),
+  }),
   autoRotate: z.strictObject({
     enabled: z.boolean(),
     /** Radians per second at 1× speed. */
@@ -176,6 +183,8 @@ export const EnvironmentSettings = z.strictObject({
 
 export const FeatureSettings = z.strictObject({
   schemaVersion: z.literal(1),
+  /** The distant planets behind the globe (settings/backdrop.json). */
+  backdropPlanets: z.boolean(),
   clouds: z.boolean(),
   stars: z.boolean(),
   /** Decorative formations, such as the smiling hemisphere and scattered islets. */
@@ -185,6 +194,66 @@ export const FeatureSettings = z.strictObject({
   announcements: z.boolean(),
   /** Visitors can switch language with `?lang=`. */
   localeFromUrl: z.boolean(),
+})
+
+/**
+ * How a visitor enters a location's own world. Today a world is a page: a path on this site
+ * (such as `./worlds/crislab/`) or an `https://` address. Scripts and other schemes are refused.
+ */
+export const LocationEntry = z.strictObject({
+  type: z.literal('url'),
+  href: z
+    .string()
+    .min(1)
+    .regex(
+      /^(?:https:\/\/[^\s]+|(?!\/\/)(?![a-z][a-z0-9+.-]*:)[^\s]+)$/i,
+      'entry links are https:// addresses or paths on this site',
+    ),
+  /** `same-tab` leaves the globe for the world; `new-tab` keeps the globe open behind it. */
+  openIn: z.enum(['same-tab', 'new-tab']),
+  /** `dive`: the camera swoops toward the island and the screen fades before the world opens. */
+  transition: z.enum(['dive', 'none']),
+  /** Text for the Enter button, such as "Step into CrisLab". Defaults to "Enter {name}". */
+  labelKey: TextKey.nullable(),
+})
+
+/**
+ * Distant planets painted far behind the globe. They stay put while the globe turns, show
+ * their name on hover, and open their own world when clicked, if they have an `entry`.
+ */
+export const BackdropSettings = z.strictObject({
+  schemaVersion: z.literal(1),
+  planets: z.array(
+    z.strictObject({
+      id: Id,
+      nameKey: TextKey,
+      /** Where it hangs in the scene, globe units. The camera looks from +z toward the center. */
+      position: Vec3,
+      radius: z.number().min(0.2).max(20),
+      /** Radians per second it turns on its own axis (0 holds it still). */
+      spin: z.number().min(0).max(1),
+      /** Tilt of its axis, degrees. */
+      tiltDeg: z.number().min(-90).max(90),
+      look: z.discriminatedUnion('type', [
+        z.strictObject({
+          type: z.literal('painted'),
+          /** `banded`: a gas giant with belts and a storm. `rocky`: a dusty world with darker plains and ice caps. */
+          style: z.enum(['banded', 'rocky']),
+          /** Base colors from light to dark; the painter blends between them. */
+          colors: z.array(Color).min(2).max(8),
+          /** Paints a ring around it. */
+          ring: z.boolean(),
+          seed: z.number().int(),
+        }),
+        z.strictObject({
+          type: z.literal('image'),
+          /** A registered image asset, shown as a flat disc facing the viewer. */
+          assetId: z.string().min(1),
+        }),
+      ]),
+      entry: LocationEntry.nullable(),
+    }),
+  ),
 })
 
 export const DiscoverySettings = z.strictObject({
@@ -267,6 +336,8 @@ export const LocationFile = z.strictObject({
   tags: z.array(Id),
   parent: Id.nullable(),
   related: z.array(Id),
+  /** Optional: the world this location opens into when its island is clicked. Without it, clicking only selects. */
+  entry: LocationEntry.nullable().optional(),
 })
 
 const OvalTerrain = z.strictObject({
@@ -479,6 +550,7 @@ export const FormationFile = z.discriminatedUnion('type', [IslandArrangementFile
 /** UI components configuration may place. Anything else is rejected. */
 export const ComponentNames = [
   'SelectionChip',
+  'LocationLegend',
   'ShoreLegend',
   'GlobeControls',
   'DestinationDetails',

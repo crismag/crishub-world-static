@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "planets": [
+    {
+      "id": "jupiter",
+      "nameKey": "planet.jupiter.name",
+      "position": [-26, 6, -80],
+      "radius": 3.4,
+      "spin": 0.05,
+      "tiltDeg": 3,
+      "look": {
+        "type": "painted",
+        "style": "banded",
+        "colors": ["#f3e2c3", "#d9b48a", "#b8835a", "#8c5a3c"],
+        "ring": false,
+        "seed": 5
+      },
+      "entry": null
+    },
+    {
+      "id": "mars",
+      "nameKey": "planet.mars.name",
+      "position": [5, 9, -48],
+      "radius": 1,
+      "spin": 0.08,
+      "tiltDeg": 25,
+      "look": {
+        "type": "painted",
+        "style": "rocky",
+        "colors": ["#e0794a", "#c1552f", "#8e3b22"],
+        "ring": false,
+        "seed": 7
+      },
+      "entry": null
+    }
+  ]
+}

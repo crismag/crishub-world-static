@@ -27,9 +27,10 @@ This page summarizes each file. Every file has `"schemaVersion": 1`. Unknown fie
 |---|---|
 | `globe.json` | `radius`; `axialTiltDeg`; `iceCapLatitudeDeg`; `quality` (`high`/`medium`/`low`) and `qualityPresets` (`landSegments`, `oceanSegments`, `maxPixelRatio`); `placementRules` (`minShoreSeparationDeg`, `poleClearanceDeg`) |
 | `camera.json` | `fovDeg`, `near`, `far`; `direction` (the camera's line toward the center); `minDistance`, `maxDistance`, `defaultDistance`; `focusDropDeg` (where a chosen shore rests); `initialOrientation` (`pitchDeg`, `yawDeg`, `face`) |
-| `controls.json` | `rotationMode` (`trackball` only); `dragSensitivity`; `inertia` (`enabled`, `decayPerSecond`, `maxRadiansPerSecond`); `focusEasing`; `zoom` (`wheelSensitivity`, `pinchSensitivity`, `buttonStep`); `keyboard` (`enabled`, `rotateStepPx`, `zoomStep`); `clickTolerancePx`; `autoRotate` (`enabled`, `radiansPerSecond`, `idleDelaySeconds`, `speeds`, `defaultSpeed`); `respectReducedMotion` |
+| `controls.json` | `rotationMode` (`trackball` only); `dragSensitivity`; `inertia` (`enabled`, `decayPerSecond`, `maxRadiansPerSecond`); `focusEasing`; `zoom` (`wheelSensitivity`, `pinchSensitivity`, `buttonStep`); `keyboard` (`enabled`, `rotateStepPx`, `zoomStep`); `clickTolerancePx`; `entryTransition` (`durationMs`, `diveDistance`); `autoRotate` (`enabled`, `radiansPerSecond`, `idleDelaySeconds`, `speeds`, `defaultSpeed`); `respectReducedMotion` |
 | `environment.json` | `background`; `lights` (`hemisphere`, `ambient`, `key`, `fill`); `stars`; `sun`; `atmosphere` (`color`, `strength`, `scale`); `clouds` (`seed`, and for `puffy` and `wispy`: `count`, `color`, `opacity`, `altitude`, `speed`) |
-| `features.json` | `clouds`, `stars`, `formations`, `polarLandmarks`, `announcements`, `localeFromUrl` |
+| `backdrop.json` | `planets[]`: `id`, `nameKey`, `position`, `radius`, `spin`, `tiltDeg`, `look` (`painted`: `style` `banded` or `rocky`, `colors`, `ring`, `seed`; or `image`: `assetId`), `entry` (as for locations, or `null`) |
+| `features.json` | `backdropPlanets`, `clouds`, `stars`, `formations`, `polarLandmarks`, `announcements`, `localeFromUrl` |
 | `discovery.json` | `smileGreeting` (`enabled`, `formation`, `messageKey`, `alignment`) |
 | `categories.json` | `categories[]`: `id`, `labelKey`, `pluralKey`, `order`, `listed` (appears in filters and the directory) |
 
@@ -54,6 +55,7 @@ Cross-checks:
 | `references` | `terrain`, `landmarks`, `items`: file names, or `null` |
 | `interaction` | `selectable` (a shore visitors can choose), `tooltipEnabled` (hover tooltip for non-selectable places), `markerRadius` (selection ring and click target) |
 | `tags`, `parent`, `related` | Grouping and links to other location IDs (checked to exist) |
+| `entry` | Optional. The world clicking the island opens: `type` (`url`), `href` (a path on this site or `https://`), `openIn` (`same-tab` or `new-tab`), `transition` (`dive` or `none`), `labelKey`. Without it, clicking only selects |
 
 **`terrain.json`:** `locationId` and one `shape`:
 

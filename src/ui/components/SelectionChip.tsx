@@ -1,5 +1,5 @@
-import { BookOpen, X } from 'lucide-react'
 import { loadContent } from '@/runtime/content/index.ts'
+import { BookOpen, DoorOpen, X } from 'lucide-react'
 import { useText } from '@/runtime/localization/index.tsx'
 import { UI } from '@/runtime/localization/ui-keys.ts'
 import { categoryOf, getLocation, world } from '@/runtime/world-registry/index.ts'
@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button.tsx'
  */
 export function SelectionChip({ readMore = false }: { readMore?: boolean }) {
   const { t } = useText()
-  const { selectedId, select, setPanelOpen, panelOpen } = useExplorer()
+  const { selectedId, select, setPanelOpen, panelOpen, enter, entering } = useExplorer()
   const location = selectedId ? getLocation(selectedId) : undefined
   if (!location) return null
   // Start fetching the writeups now, so they are ready when Read is pressed.
@@ -39,6 +39,19 @@ export function SelectionChip({ readMore = false }: { readMore?: boolean }) {
         >
           <BookOpen className="size-3.5" />
           {t(UI.readMore)}
+        </Button>
+      )}
+      {location.entry && (
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="h-6 shrink-0 gap-1 rounded-full px-2 text-xs"
+          disabled={entering !== null}
+          onClick={() => enter(location.id)}
+        >
+          <DoorOpen className="size-3.5" />
+          {location.entry.labelKey ? t(location.entry.labelKey, { name }) : t(UI.enter, { name })}
         </Button>
       )}
       <Button

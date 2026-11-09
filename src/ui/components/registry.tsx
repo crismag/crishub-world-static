@@ -4,6 +4,7 @@ import { Announcements } from '@/ui/components/Announcements.tsx'
 import { DestinationDetails } from '@/ui/components/DestinationDetails.tsx'
 import { DestinationDirectory } from '@/ui/components/DestinationDirectory.tsx'
 import { GlobeControls } from '@/ui/components/GlobeControls.tsx'
+import { LocationLegend } from '@/ui/components/LocationLegend.tsx'
 import { SelectionChip } from '@/ui/components/SelectionChip.tsx'
 import { ShoreLegend } from '@/ui/components/ShoreLegend.tsx'
 
@@ -17,6 +18,7 @@ type Props = LayoutSectionT['props']
 export const components: Record<LayoutSectionT['component'], (props: Props) => ReactNode> = {
   SelectionChip: (props) => <SelectionChip readMore={props.readMore === true} />,
   ShoreLegend: () => <ShoreLegend />,
+  LocationLegend: (props) => <LocationLegend defaultOpen={props.defaultOpen === true} />,
   GlobeControls: (props) => (
     <GlobeControls
       showSpeed={props.showSpeed !== false}

@@ -135,6 +135,66 @@ describe('identity and references', () => {
   })
 })
 
+describe('world entries', () => {
+  const entry = (href: string) => ({ type: 'url', href, openIn: 'same-tab', transition: 'dive', labelKey: null })
+
+  test('a location may name the world it opens into: a path on this site or an https address', () => {
+    for (const href of ['./worlds/japan/', 'worlds/japan/index.html', '/worlds/japan/', 'https://japan.crishub.com/']) {
+      fresh()
+      world.edit<Record<string, unknown>>('locations/countries/japan/location.json', (data) => {
+        data.entry = entry(href)
+      })
+      const result = world.compile()
+      expect(result.messages, href).toBe('')
+      expect(result.registry!.locations.find((item) => item.id === 'japan')!.entry!.href).toBe(href)
+      world.dispose()
+    }
+  })
+
+  test('scripts, other schemes, and protocol-relative links are refused', () => {
+    for (const href of ['javascript:alert(1)', 'data:text/html,hi', 'http://example.com', '//evil.example/']) {
+      fresh()
+      world.edit<Record<string, unknown>>('locations/countries/japan/location.json', (data) => {
+        data.entry = entry(href)
+      })
+      expect(world.compile().messages, href).toMatch(/entry links are https/)
+      world.dispose()
+    }
+  })
+
+  test('locations without an entry compile to null, and a custom label must exist', () => {
+    fresh()
+    expect(world.compile().registry!.locations.every((location) => location.entry === null)).toBe(true)
+    world.edit<Record<string, unknown>>('locations/countries/japan/location.json', (data) => {
+      data.entry = { ...entry('./worlds/japan/'), labelKey: 'location.japan.enter' }
+    })
+    expect(world.compile().messages).toMatch(/text key "location\.japan\.enter" is missing/)
+  })
+})
+
+describe('backdrop planets', () => {
+  test('Mars and Jupiter hang far behind the globe, with no world to enter yet', () => {
+    fresh()
+    const backdrop = world.compile().registry!.backdrop
+    expect(backdrop.map((planet) => planet.id)).toEqual(['jupiter', 'mars'])
+    expect(backdrop.every((planet) => planet.entry === null)).toBe(true)
+  })
+
+  test('a planet too close to the globe, or with a missing image, is refused', () => {
+    fresh()
+    world.edit<{ planets: { position: number[] }[] }>('settings/backdrop.json', (data) => {
+      data.planets[1]!.position = [3, 3, -3]
+    })
+    expect(world.compile().messages).toMatch(/too close to the globe/)
+
+    fresh()
+    world.edit<{ planets: { look: unknown }[] }>('settings/backdrop.json', (data) => {
+      data.planets[0]!.look = { type: 'image', assetId: 'image.backdrop.jupiter' }
+    })
+    expect(world.compile().messages).toMatch(/asset "image\.backdrop\.jupiter" is not in the asset manifest/)
+  })
+})
+
 describe('content', () => {
   const overview = 'locations/countries/japan/content/overview.md'
 
