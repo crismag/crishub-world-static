@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "locations": [
+    "countries/philippines",
+    "virtual/crislab",
+    "countries/canada",
+    "virtual/marketlab",
+    "countries/singapore",
+    "virtual/adarna-writer",
+    "countries/united-states",
+    "virtual/awkward-studio",
+    "countries/malaysia",
+    "virtual/oikonomia",
+    "countries/thailand",
+    "virtual/ekklesia",
+    "countries/hong-kong",
+    "virtual/dalisay-ui",
+    "countries/japan",
+    "mystery/lantern-shoal",
+    "mystery/question-atoll",
+    "mystery/violet-gate",
+    "realms/naruto-islands",
+    "mystery/mystery-island",
+    "realms/dreams-and-aspiration",
+    "realms/semiconductor-land",
+    "realms/sss-tier-lands",
+    "realms/isla-sorna",
+    "special/north-pole",
+    "special/south-pole",
+    "special/programming"
+  ]
+}

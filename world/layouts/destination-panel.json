@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "showCategory": true,
+  "showTagline": true,
+  "emptyMessageKey": "panel.empty",
+  "expandAccordions": false
+}

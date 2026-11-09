@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "ekklesia",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.ekklesia.name",
+    "shortNameKey": "location.ekklesia.short",
+    "descriptionKey": "location.ekklesia.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 120
+  },
+  "placement": {
+    "latitude": 0.540294,
+    "longitude": -38.909621,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#8d6b4a",
+    "shore": "#f0e2cc",
+    "accent": "#f2a65a"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

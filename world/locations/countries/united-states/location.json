@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "united-states",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.united-states.name",
+    "shortNameKey": "location.united-states.short",
+    "descriptionKey": "location.united-states.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 70
+  },
+  "placement": {
+    "latitude": -8.901534,
+    "longitude": -123.924691,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#6f8f72",
+    "shore": "#e7d7b0",
+    "accent": "#6fbf9b"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

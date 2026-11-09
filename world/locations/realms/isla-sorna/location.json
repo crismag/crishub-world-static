@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "isla-sorna",
+  "category": "realm",
+  "status": "published",
+  "display": {
+    "nameKey": "location.isla-sorna.name",
+    "shortNameKey": "location.isla-sorna.short",
+    "descriptionKey": "location.isla-sorna.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 240
+  },
+  "placement": {
+    "latitude": -30.558714,
+    "longitude": -143.986804,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#2e6b3a",
+    "shore": "#d8c48e",
+    "accent": "#ff6a3d"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "realm"
+  ],
+  "parent": null,
+  "related": []
+}

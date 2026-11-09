@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "background": "#070b14",
+  "lights": {
+    "hemisphere": { "sky": "#d7ecff", "ground": "#1c3a4a", "intensity": 0.92 },
+    "ambient": { "color": "#ffffff", "intensity": 0.28 },
+    "key": { "color": "#fff4dd", "intensity": 1.4, "position": [6, 4.2, 5] },
+    "fill": { "color": "#8ec5ff", "intensity": 0.5, "position": [-5, 1.6, -3] }
+  },
+  "stars": { "count": 900, "radius": 55, "depth": 28, "size": 2.6, "drift": 0.25 },
+  "sun": { "position": [24, 12, 16], "color": "#ffe3b8", "glow": "#ffd7a1", "radius": 1.15 },
+  "atmosphere": { "color": "#99d9ff", "strength": 0.7, "scale": 1.085 },
+  "clouds": {
+    "seed": 29,
+    "puffy": { "count": 7, "color": "#e9f4fb", "opacity": 1, "altitude": 0.5, "speed": 1 },
+    "wispy": { "count": 5, "color": "#ffffff", "opacity": 0.72, "altitude": 0.76, "speed": 1.45 }
+  }
+}

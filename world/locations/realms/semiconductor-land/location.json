@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "semiconductor-land",
+  "category": "realm",
+  "status": "published",
+  "display": {
+    "nameKey": "location.semiconductor-land.name",
+    "shortNameKey": "location.semiconductor-land.short",
+    "descriptionKey": "location.semiconductor-land.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 220
+  },
+  "placement": {
+    "latitude": -36.644063,
+    "longitude": -59.002332,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#25624a",
+    "shore": "#9fc7b4",
+    "accent": "#46d6a8"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "realm"
+  ],
+  "parent": null,
+  "related": []
+}

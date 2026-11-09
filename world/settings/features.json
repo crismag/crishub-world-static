@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "clouds": true,
+  "stars": true,
+  "formations": true,
+  "polarLandmarks": true,
+  "announcements": true,
+  "localeFromUrl": true
+}

@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "locationId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "landmarks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "preset": {
+            "type": "string",
+            "enum": [
+              "classic-philippines",
+              "classic-canada",
+              "classic-singapore",
+              "classic-united-states",
+              "classic-malaysia",
+              "classic-thailand",
+              "classic-hong-kong",
+              "classic-japan",
+              "classic-crislab",
+              "classic-marketlab",
+              "classic-adarna-writer",
+              "classic-awkward-studio",
+              "classic-oikonomia",
+              "classic-ekklesia",
+              "classic-dalisay-ui",
+              "classic-lantern-shoal",
+              "classic-question-atoll",
+              "classic-violet-gate",
+              "leaf-village",
+              "rain-town",
+              "sound-stage",
+              "sand-town",
+              "mystery-chest",
+              "dreams-stairway",
+              "semiconductor-chip",
+              "sss-crown",
+              "volcano-jungle",
+              "beacon",
+              "vault",
+              "lettering",
+              "continent-scenery",
+              "tower",
+              "crystal",
+              "mountain",
+              "pine-grove",
+              "palm-grove",
+              "model"
+            ]
+          },
+          "assetId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "labelKey": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lobe": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "position": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotationDeg": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "scale": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 10
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "animation": {
+            "type": "string",
+            "enum": [
+              "default",
+              "none"
+            ]
+          },
+          "params": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "id",
+          "preset",
+          "assetId",
+          "labelKey",
+          "lobe",
+          "position",
+          "rotationDeg",
+          "scale",
+          "visible",
+          "animation",
+          "params"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "locationId",
+    "landmarks"
+  ],
+  "additionalProperties": false
+}

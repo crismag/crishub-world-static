@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "filters": [
+    { "id": "all", "labelKey": "filter.all", "categories": "all" },
+    { "id": "places", "labelKey": "category.country.plural", "categories": ["country"] },
+    { "id": "projects", "labelKey": "category.virtual.plural", "categories": ["virtual"] },
+    { "id": "realms", "labelKey": "category.realm.plural", "categories": ["realm"] },
+    { "id": "uncharted", "labelKey": "category.mystery.plural", "categories": ["mystery"] }
+  ],
+  "directory": { "groupByCategory": true }
+}

@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "rotationMode": {
+      "type": "string",
+      "const": "trackball"
+    },
+    "dragSensitivity": {
+      "type": "number",
+      "minimum": 0.0005,
+      "maximum": 0.05
+    },
+    "inertia": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "decayPerSecond": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 20
+        },
+        "maxRadiansPerSecond": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "enabled",
+        "decayPerSecond",
+        "maxRadiansPerSecond"
+      ],
+      "additionalProperties": false
+    },
+    "focusEasing": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 30
+    },
+    "zoom": {
+      "type": "object",
+      "properties": {
+        "wheelSensitivity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.05
+        },
+        "pinchSensitivity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.1
+        },
+        "buttonStep": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "wheelSensitivity",
+        "pinchSensitivity",
+        "buttonStep"
+      ],
+      "additionalProperties": false
+    },
+    "keyboard": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "rotateStepPx": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "zoomStep": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "enabled",
+        "rotateStepPx",
+        "zoomStep"
+      ],
+      "additionalProperties": false
+    },
+    "clickTolerancePx": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 50
+    },
+    "autoRotate": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "radiansPerSecond": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "idleDelaySeconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60
+        },
+        "speeds": {
+          "minItems": 1,
+          "maxItems": 6,
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10
+          }
+        },
+        "defaultSpeed": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      },
+      "required": [
+        "enabled",
+        "radiansPerSecond",
+        "idleDelaySeconds",
+        "speeds",
+        "defaultSpeed"
+      ],
+      "additionalProperties": false
+    },
+    "respectReducedMotion": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "rotationMode",
+    "dragSensitivity",
+    "inertia",
+    "focusEasing",
+    "zoom",
+    "keyboard",
+    "clickTolerancePx",
+    "autoRotate",
+    "respectReducedMotion"
+  ],
+  "additionalProperties": false
+}

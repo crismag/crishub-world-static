@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "crislab",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      7.681409,
+      6.302536
+    ],
+    "headingDeg": 123.009138,
+    "flatRadiusDeg": 4.297183
+  }
+}

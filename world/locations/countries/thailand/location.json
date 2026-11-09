@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "thailand",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.thailand.name",
+    "shortNameKey": "location.thailand.short",
+    "descriptionKey": "location.thailand.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 110
+  },
+  "placement": {
+    "latitude": 8.901534,
+    "longitude": 118.629657,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#c4a15a",
+    "shore": "#f3e2c2",
+    "accent": "#e1b03a"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

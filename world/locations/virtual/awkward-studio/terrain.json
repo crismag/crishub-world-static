@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "awkward-studio",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      9.015792,
+      6.302536
+    ],
+    "headingDeg": 121.948059,
+    "flatRadiusDeg": 4.297183
+  }
+}

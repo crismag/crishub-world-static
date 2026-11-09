@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "violet-gate",
+  "category": "mystery",
+  "status": "published",
+  "display": {
+    "nameKey": "location.violet-gate.name",
+    "shortNameKey": "location.violet-gate.short",
+    "descriptionKey": "location.violet-gate.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 180
+  },
+  "placement": {
+    "latitude": -11.475411,
+    "longitude": 98.567545,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#241838",
+    "shore": "#3a2758",
+    "accent": "#c9b0ff"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "mystery"
+  ],
+  "parent": null,
+  "related": []
+}

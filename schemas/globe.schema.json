@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "radius": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 20
+    },
+    "axialTiltDeg": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 45
+    },
+    "iceCapLatitudeDeg": {
+      "type": "number",
+      "minimum": 45,
+      "maximum": 89
+    },
+    "quality": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "qualityPresets": {
+      "type": "object",
+      "properties": {
+        "high": {
+          "type": "object",
+          "properties": {
+            "landSegments": {
+              "type": "integer",
+              "minimum": 128,
+              "maximum": 1024
+            },
+            "oceanSegments": {
+              "type": "integer",
+              "minimum": 48,
+              "maximum": 384
+            },
+            "maxPixelRatio": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "landSegments",
+            "oceanSegments",
+            "maxPixelRatio"
+          ],
+          "additionalProperties": false
+        },
+        "medium": {
+          "type": "object",
+          "properties": {
+            "landSegments": {
+              "type": "integer",
+              "minimum": 128,
+              "maximum": 1024
+            },
+            "oceanSegments": {
+              "type": "integer",
+              "minimum": 48,
+              "maximum": 384
+            },
+            "maxPixelRatio": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "landSegments",
+            "oceanSegments",
+            "maxPixelRatio"
+          ],
+          "additionalProperties": false
+        },
+        "low": {
+          "type": "object",
+          "properties": {
+            "landSegments": {
+              "type": "integer",
+              "minimum": 128,
+              "maximum": 1024
+            },
+            "oceanSegments": {
+              "type": "integer",
+              "minimum": 48,
+              "maximum": 384
+            },
+            "maxPixelRatio": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "landSegments",
+            "oceanSegments",
+            "maxPixelRatio"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "additionalProperties": false
+    },
+    "placementRules": {
+      "type": "object",
+      "properties": {
+        "minShoreSeparationDeg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 90
+        },
+        "poleClearanceDeg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 45
+        }
+      },
+      "required": [
+        "minShoreSeparationDeg",
+        "poleClearanceDeg"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "radius",
+    "axialTiltDeg",
+    "iceCapLatitudeDeg",
+    "quality",
+    "qualityPresets",
+    "placementRules"
+  ],
+  "additionalProperties": false
+}

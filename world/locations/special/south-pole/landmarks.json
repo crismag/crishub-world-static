@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "locationId": "south-pole",
+  "landmarks": [
+    {
+      "id": "vault",
+      "preset": "vault",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": null,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        180,
+        0
+      ],
+      "scale": 1.25,
+      "visible": true,
+      "animation": "default",
+      "params": {}
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "clouds": {
+      "type": "boolean"
+    },
+    "stars": {
+      "type": "boolean"
+    },
+    "formations": {
+      "type": "boolean"
+    },
+    "polarLandmarks": {
+      "type": "boolean"
+    },
+    "announcements": {
+      "type": "boolean"
+    },
+    "localeFromUrl": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "clouds",
+    "stars",
+    "formations",
+    "polarLandmarks",
+    "announcements",
+    "localeFromUrl"
+  ],
+  "additionalProperties": false
+}

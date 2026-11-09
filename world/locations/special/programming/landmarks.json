@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "locationId": "programming",
+  "landmarks": [
+    {
+      "id": "lettering",
+      "preset": "lettering",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": null,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "visible": true,
+      "animation": "default",
+      "params": {
+        "words": [
+          "PHP",
+          "MYSQL",
+          "PYTHON",
+          "TCL",
+          "PERL",
+          "REACT",
+          "NODE.JS",
+          "TYPESCRIPT",
+          "JAVASCRIPT",
+          "AWS",
+          "GCP",
+          "FLASK",
+          "DJANGO",
+          "APACHE",
+          "AUTOMATION",
+          "LINUX"
+        ],
+        "halfWidthDeg": 11.459156
+      }
+    },
+    {
+      "id": "scenery",
+      "preset": "continent-scenery",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": null,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1,
+      "visible": true,
+      "animation": "default",
+      "params": {
+        "count": 46,
+        "seed": 404,
+        "innerDeg": 18.907607,
+        "outerDeg": 22.918312
+      }
+    }
+  ]
+}

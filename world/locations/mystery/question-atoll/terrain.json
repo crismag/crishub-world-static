@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "question-atoll",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      8.350639,
+      5.443099
+    ],
+    "headingDeg": 80.539979,
+    "flatRadiusDeg": 4.297183
+  }
+}

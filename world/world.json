@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "crishub-world",
+  "nameKey": "world.name",
+  "descriptionKey": "world.description",
+  "defaultLocale": "en",
+  "locales": ["en", "fil"],
+  "defaultTheme": "default",
+  "settings": {
+    "globe": "settings/globe.json",
+    "camera": "settings/camera.json",
+    "controls": "settings/controls.json",
+    "environment": "settings/environment.json",
+    "features": "settings/features.json",
+    "discovery": "settings/discovery.json",
+    "categories": "settings/categories.json"
+  },
+  "locations": "locations/index.json",
+  "formations": "formations/index.json",
+  "layouts": {
+    "explorer": "layouts/explorer.json",
+    "destinationPanel": "layouts/destination-panel.json",
+    "navigation": "layouts/navigation.json"
+  },
+  "themes": { "default": "themes/default.json" },
+  "messages": "messages/announcements.json",
+  "assets": "assets/manifest.json"
+}

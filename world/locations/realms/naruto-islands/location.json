@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "naruto-islands",
+  "category": "realm",
+  "status": "published",
+  "display": {
+    "nameKey": "location.naruto-islands.name",
+    "shortNameKey": "location.naruto-islands.short",
+    "descriptionKey": "location.naruto-islands.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 190
+  },
+  "placement": {
+    "latitude": 34.861052,
+    "longitude": 94.67282,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#5f8f4a",
+    "shore": "#d8c48e",
+    "accent": "#ff9f43"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.84
+  },
+  "tags": [
+    "realm"
+  ],
+  "parent": null,
+  "related": []
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "oikonomia",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.oikonomia.name",
+    "shortNameKey": "location.oikonomia.short",
+    "descriptionKey": "location.oikonomia.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 100
+  },
+  "placement": {
+    "latitude": -24.780987,
+    "longitude": -17.930601,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#c4b49a",
+    "shore": "#efe4d2",
+    "accent": "#f4f1ea"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

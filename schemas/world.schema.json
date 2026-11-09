@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "nameKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+    },
+    "descriptionKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+    },
+    "defaultLocale": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}$"
+    },
+    "locales": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2,3}$"
+      }
+    },
+    "defaultTheme": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "globe": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "camera": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "controls": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "environment": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "features": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "discovery": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "categories": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        }
+      },
+      "required": [
+        "globe",
+        "camera",
+        "controls",
+        "environment",
+        "features",
+        "discovery",
+        "categories"
+      ],
+      "additionalProperties": false
+    },
+    "locations": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+    },
+    "formations": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+    },
+    "layouts": {
+      "type": "object",
+      "properties": {
+        "explorer": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "destinationPanel": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        },
+        "navigation": {
+          "type": "string",
+          "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+        }
+      },
+      "required": [
+        "explorer",
+        "destinationPanel",
+        "navigation"
+      ],
+      "additionalProperties": false
+    },
+    "themes": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+      }
+    },
+    "messages": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+    },
+    "assets": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "nameKey",
+    "descriptionKey",
+    "defaultLocale",
+    "locales",
+    "defaultTheme",
+    "settings",
+    "locations",
+    "formations",
+    "layouts",
+    "themes",
+    "messages",
+    "assets"
+  ],
+  "additionalProperties": false
+}

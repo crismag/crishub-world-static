@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "dreams-and-aspiration",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      7.04605,
+      6.302536
+    ],
+    "headingDeg": 93.139749,
+    "flatRadiusDeg": 4.297183
+  }
+}

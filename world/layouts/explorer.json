@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "globe-explorer",
+  "regions": {
+    "top": [
+      { "id": "announcements", "component": "Announcements", "order": 10, "visible": true, "props": { "placement": "top" } },
+      { "id": "selection", "component": "SelectionChip", "order": 20, "visible": true, "props": { "readMore": true } }
+    ],
+    "bottomLeft": [
+      { "id": "legend", "component": "ShoreLegend", "order": 10, "visible": true, "props": {} }
+    ],
+    "bottomRight": [
+      {
+        "id": "controls",
+        "component": "GlobeControls",
+        "order": 10,
+        "visible": true,
+        "props": { "showSpeed": true, "showZoom": true, "showReset": true }
+      }
+    ]
+  },
+  "leftPanel": {
+    "enabled": false,
+    "width": 320,
+    "open": "always",
+    "sections": [
+      { "id": "directory", "component": "DestinationDirectory", "order": 10, "visible": true, "props": {} }
+    ]
+  },
+  "rightPanel": {
+    "enabled": true,
+    "width": 360,
+    "open": "on-demand",
+    "sections": [
+      { "id": "details", "component": "DestinationDetails", "order": 10, "visible": true, "props": {} }
+    ]
+  }
+}

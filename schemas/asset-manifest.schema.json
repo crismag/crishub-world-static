@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "root": {
+      "type": "string",
+      "pattern": "^public\\/[a-z0-9-]+(?:\\/[a-z0-9-]+)*$"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "model",
+              "texture",
+              "image",
+              "icon",
+              "audio",
+              "thumbnail",
+              "environment",
+              "animation"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+(?:\\/[a-z0-9-]+)*\\.[a-z0-9]+$"
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "deprecated",
+              "draft"
+            ]
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "attribution": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "path",
+          "displayName",
+          "version",
+          "status",
+          "license",
+          "attribution",
+          "tags"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "root",
+    "assets"
+  ],
+  "additionalProperties": false
+}

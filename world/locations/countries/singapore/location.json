@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "singapore",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.singapore.name",
+    "shortNameKey": "location.singapore.short",
+    "descriptionKey": "location.singapore.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 50
+  },
+  "placement": {
+    "latitude": -50.68589,
+    "longitude": 110.966612,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#3d8f78",
+    "shore": "#f0d7a4",
+    "accent": "#e8d7b0"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

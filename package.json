@@ -5,36 +5,45 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run world:build && tsc -b && vite build",
     "lint": "oxlint",
-    "test": "node --experimental-strip-types --test 'src/**/*.test.ts'",
-    "preview": "vite preview"
+    "test": "npm run world:build && vitest run",
+    "preview": "vite preview",
+    "world:validate": "node --experimental-strip-types scripts/world.ts validate",
+    "world:build": "node --experimental-strip-types scripts/world.ts build",
+    "assets:audit": "node --experimental-strip-types scripts/assets-audit.ts"
   },
   "dependencies": {
     "@fontsource-variable/fredoka": "^5.3.0",
-    "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/nunito": "^5.3.0",
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
     "lucide-react": "^1.70.0",
+    "markdown-it": "^15.0.3",
     "radix-ui": "^1.8.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "shadcn": "^4.23.0",
     "three": "^0.187.0",
-    "tw-animate-css": "^1.4.0"
+    "tw-animate-css": "^1.4.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.5",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/markdown-it": "^14.2.0",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^31.0.0",
     "oxlint": "^1.90.0",
     "tailwindcss": "^4.3.5",
     "typescript": "~7.0.2",
-    "vite": "^8.3.6"
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0"
   }
 }

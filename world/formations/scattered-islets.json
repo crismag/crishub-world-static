@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "scattered-islets",
+  "type": "islets",
+  "status": "published",
+  "islands": [
+    {
+      "id": "islet-1",
+      "latitude": 50.9185,
+      "longitude": 138.69177,
+      "radiusDeg": [
+        3.510186,
+        2.57831
+      ],
+      "headingDeg": 105.361113,
+      "flatRadiusDeg": 1.718873,
+      "dress": "palms"
+    },
+    {
+      "id": "islet-2",
+      "latitude": 34.43123,
+      "longitude": 66.106365,
+      "radiusDeg": [
+        3.463172,
+        2.57831
+      ],
+      "headingDeg": 33.61264,
+      "flatRadiusDeg": 1.718873,
+      "dress": "pines"
+    },
+    {
+      "id": "islet-3",
+      "latitude": 29.258456,
+      "longitude": -123.924691,
+      "radiusDeg": [
+        4.286037,
+        2.57831
+      ],
+      "headingDeg": 138.585155,
+      "flatRadiusDeg": 1.718873,
+      "dress": "pines"
+    },
+    {
+      "id": "islet-4",
+      "latitude": 17.282505,
+      "longitude": -59.002332,
+      "radiusDeg": [
+        3.854716,
+        2.57831
+      ],
+      "headingDeg": 35.343316,
+      "flatRadiusDeg": 1.718873,
+      "dress": "pines"
+    },
+    {
+      "id": "islet-5",
+      "latitude": 9.376231,
+      "longitude": 58.44332,
+      "radiusDeg": [
+        2.923897,
+        2.57831
+      ],
+      "headingDeg": 15.680301,
+      "flatRadiusDeg": 1.718873,
+      "dress": "pines"
+    }
+  ]
+}

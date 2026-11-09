@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "showCategory": {
+      "type": "boolean"
+    },
+    "showTagline": {
+      "type": "boolean"
+    },
+    "emptyMessageKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+    },
+    "expandAccordions": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "showCategory",
+    "showTagline",
+    "emptyMessageKey",
+    "expandAccordions"
+  ],
+  "additionalProperties": false
+}

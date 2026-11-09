@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "marketlab",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.marketlab.name",
+    "shortNameKey": "location.marketlab.short",
+    "descriptionKey": "location.marketlab.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 40
+  },
+  "placement": {
+    "latitude": 32.946864,
+    "longitude": 36.883937,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#1e2a28",
+    "shore": "#c8b48a",
+    "accent": "#3ddc97"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

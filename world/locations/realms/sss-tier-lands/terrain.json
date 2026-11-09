@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "sss-tier-lands",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      9.888637,
+      6.302536
+    ],
+    "headingDeg": 129.584071,
+    "flatRadiusDeg": 4.297183
+  }
+}

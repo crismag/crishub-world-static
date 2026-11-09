@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "source": {
+            "type": "string",
+            "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+          },
+          "display": {
+            "type": "string",
+            "enum": [
+              "article",
+              "card",
+              "accordion",
+              "tab",
+              "gallery",
+              "image",
+              "links",
+              "info"
+            ]
+          },
+          "order": {
+            "type": "number"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "display",
+          "order",
+          "visible"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "sections"
+  ],
+  "additionalProperties": false
+}

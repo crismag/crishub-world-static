@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "canada",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.canada.name",
+    "shortNameKey": "location.canada.short",
+    "descriptionKey": "location.canada.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 30
+  },
+  "placement": {
+    "latitude": -22.073116,
+    "longitude": -91.463511,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#e7eef2",
+    "shore": "#d5dde3",
+    "accent": "#d4544a"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

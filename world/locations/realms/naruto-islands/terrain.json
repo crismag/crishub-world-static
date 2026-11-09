@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "locationId": "naruto-islands",
+  "shape": {
+    "type": "lobes",
+    "lobeRadiusDeg": 4.297183,
+    "bridgeHalfWidthDeg": 1.031324,
+    "flatRadiusDeg": 4.297183,
+    "lobes": [
+      {
+        "id": "leaf",
+        "atDeg": [
+          -4.870141,
+          4.870141
+        ],
+        "ground": "#2f8f45"
+      },
+      {
+        "id": "rain",
+        "atDeg": [
+          4.870141,
+          4.870141
+        ],
+        "ground": "#3d4a57"
+      },
+      {
+        "id": "sound",
+        "atDeg": [
+          4.870141,
+          -4.870141
+        ],
+        "ground": "#4b3a63"
+      },
+      {
+        "id": "sand",
+        "atDeg": [
+          -4.870141,
+          -4.870141
+        ],
+        "ground": "#e3b86c"
+      }
+    ],
+    "bridges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  }
+}

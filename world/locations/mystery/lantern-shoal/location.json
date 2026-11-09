@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "lantern-shoal",
+  "category": "mystery",
+  "status": "published",
+  "display": {
+    "nameKey": "location.lantern-shoal.name",
+    "shortNameKey": "location.lantern-shoal.short",
+    "descriptionKey": "location.lantern-shoal.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 160
+  },
+  "placement": {
+    "latitude": -24.834587,
+    "longitude": 131.028725,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#8a93a0",
+    "shore": "#b7c0c8",
+    "accent": "#f6d48a"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "mystery"
+  ],
+  "parent": null,
+  "related": []
+}

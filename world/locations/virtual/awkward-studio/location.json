@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "awkward-studio",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.awkward-studio.name",
+    "shortNameKey": "location.awkward-studio.short",
+    "descriptionKey": "location.awkward-studio.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 80
+  },
+  "placement": {
+    "latitude": -24.780987,
+    "longitude": 17.930601,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#3a2e55",
+    "shore": "#e7b8c9",
+    "accent": "#ff5d8f"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

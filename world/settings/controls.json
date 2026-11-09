@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "rotationMode": "trackball",
+  "dragSensitivity": 0.0052,
+  "inertia": { "enabled": true, "decayPerSecond": 2.3, "maxRadiansPerSecond": 2.4 },
+  "focusEasing": 5,
+  "zoom": { "wheelSensitivity": 0.0035, "pinchSensitivity": 0.012, "buttonStep": 0.55 },
+  "keyboard": { "enabled": true, "rotateStepPx": [48, 36], "zoomStep": 0.45 },
+  "clickTolerancePx": 8,
+  "autoRotate": {
+    "enabled": true,
+    "radiansPerSecond": 0.1,
+    "idleDelaySeconds": 2.4,
+    "speeds": [0, 0.5, 1, 3],
+    "defaultSpeed": 0.5
+  },
+  "respectReducedMotion": true
+}

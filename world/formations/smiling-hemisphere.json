@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "id": "smiling-hemisphere",
+  "type": "island-arrangement",
+  "status": "published",
+  "center": {
+    "latitude": 17.188734,
+    "longitude": 180
+  },
+  "uprightAgainstTilt": true,
+  "clearanceDeg": 42.398877,
+  "islands": [
+    {
+      "id": "eye-left",
+      "role": "eye",
+      "atDeg": [
+        -9.453804,
+        6.875494
+      ],
+      "radiusDeg": [
+        3.552338,
+        2.750197
+      ],
+      "headingDeg": 17.188734,
+      "ground": "#1d6638",
+      "dress": "forest"
+    },
+    {
+      "id": "eye-left-isle",
+      "role": "eye",
+      "atDeg": [
+        -13.292621,
+        9.740283
+      ],
+      "radiusDeg": [
+        1.375099,
+        1.031324
+      ],
+      "headingDeg": -22.918312,
+      "ground": "#1d6638",
+      "dress": "forest"
+    },
+    {
+      "id": "eye-left-rock",
+      "role": "eye",
+      "atDeg": [
+        -6.016057,
+        4.125296
+      ],
+      "radiusDeg": [
+        1.145916,
+        0.916732
+      ],
+      "headingDeg": 51.566202,
+      "ground": "#1d6638",
+      "dress": null
+    },
+    {
+      "id": "eye-right",
+      "role": "eye",
+      "atDeg": [
+        9.854874,
+        7.563043
+      ],
+      "radiusDeg": [
+        3.208564,
+        2.864789
+      ],
+      "headingDeg": -28.64789,
+      "ground": "#1d6638",
+      "dress": "forest"
+    },
+    {
+      "id": "eye-right-isle",
+      "role": "eye",
+      "atDeg": [
+        13.292621,
+        4.698254
+      ],
+      "radiusDeg": [
+        1.260507,
+        0.974028
+      ],
+      "headingDeg": 34.377468,
+      "ground": "#1d6638",
+      "dress": "forest"
+    },
+    {
+      "id": "nose",
+      "role": "nose",
+      "atDeg": [
+        0.687549,
+        -0.286479
+      ],
+      "radiusDeg": [
+        2.17724,
+        1.718873
+      ],
+      "headingDeg": 68.754935,
+      "ground": "#8d7f6c",
+      "dress": "peak"
+    },
+    {
+      "id": "scatter-1",
+      "role": "scatter",
+      "atDeg": [
+        -22.918312,
+        -6.875494
+      ],
+      "radiusDeg": [
+        1.718873,
+        1.145916
+      ],
+      "headingDeg": 40.107046,
+      "ground": null,
+      "dress": null
+    },
+    {
+      "id": "scatter-2",
+      "role": "scatter",
+      "atDeg": [
+        23.49127,
+        -12.032114
+      ],
+      "radiusDeg": [
+        1.48969,
+        1.145916
+      ],
+      "headingDeg": -17.188734,
+      "ground": null,
+      "dress": null
+    },
+    {
+      "id": "scatter-3",
+      "role": "scatter",
+      "atDeg": [
+        20.626481,
+        17.761692
+      ],
+      "radiusDeg": [
+        1.375099,
+        1.08862
+      ],
+      "headingDeg": 80.214091,
+      "ground": null,
+      "dress": null
+    },
+    {
+      "id": "scatter-4",
+      "role": "scatter",
+      "atDeg": [
+        -19.480565,
+        19.480565
+      ],
+      "radiusDeg": [
+        1.604282,
+        1.145916
+      ],
+      "headingDeg": 11.459156,
+      "ground": null,
+      "dress": null
+    }
+  ],
+  "arcs": [
+    {
+      "id": "smile",
+      "role": "mouth",
+      "centerDeg": [
+        0,
+        5.729578
+      ],
+      "radiusDeg": 16.615776,
+      "fromDeg": -152,
+      "toDeg": -28,
+      "lengthsDeg": [
+        1.48969,
+        1.718873,
+        1.661578,
+        1.833465,
+        1.718873,
+        1.604282,
+        1.776169,
+        1.546986,
+        1.432394
+      ],
+      "jitterDeg": [
+        0.343775,
+        -0.229183,
+        0.171887,
+        -0.286479,
+        0.114592,
+        0.286479,
+        -0.171887,
+        0.229183,
+        0.687549
+      ],
+      "widthDeg": 1.145916,
+      "ground": "#d8c48e",
+      "dressEvery": 3,
+      "dress": "palms"
+    }
+  ]
+}

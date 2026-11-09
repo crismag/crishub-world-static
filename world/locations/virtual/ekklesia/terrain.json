@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "ekklesia",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      10.242852,
+      6.302536
+    ],
+    "headingDeg": 6.205927,
+    "flatRadiusDeg": 4.297183
+  }
+}

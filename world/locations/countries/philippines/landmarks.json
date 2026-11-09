@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "locationId": "philippines",
+  "landmarks": [
+    {
+      "id": "main",
+      "preset": "classic-philippines",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": null,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.3,
+      "visible": true,
+      "animation": "default",
+      "params": {}
+    }
+  ]
+}

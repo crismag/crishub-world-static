@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "question-atoll",
+  "category": "mystery",
+  "status": "published",
+  "display": {
+    "nameKey": "location.question-atoll.name",
+    "shortNameKey": "location.question-atoll.short",
+    "descriptionKey": "location.question-atoll.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 170
+  },
+  "placement": {
+    "latitude": -54.874601,
+    "longitude": -26.541152,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#6d6458",
+    "shore": "#cfc3b0",
+    "accent": "#f4efe6"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "mystery"
+  ],
+  "parent": null,
+  "related": []
+}

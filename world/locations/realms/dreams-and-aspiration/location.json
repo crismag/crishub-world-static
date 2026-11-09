@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "dreams-and-aspiration",
+  "category": "realm",
+  "status": "published",
+  "display": {
+    "nameKey": "location.dreams-and-aspiration.name",
+    "shortNameKey": "location.dreams-and-aspiration.short",
+    "descriptionKey": "location.dreams-and-aspiration.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 210
+  },
+  "placement": {
+    "latitude": -1.266641,
+    "longitude": -71.401399,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#8fa6e8",
+    "shore": "#d9d2ff",
+    "accent": "#ffd86b"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "realm"
+  ],
+  "parent": null,
+  "related": []
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "fovDeg": 36,
+  "near": 0.1,
+  "far": 120,
+  "direction": [0, 1.25, 6.3],
+  "minDistance": 6.8,
+  "maxDistance": 16.9,
+  "defaultDistance": 16.9,
+  "focusDropDeg": 6.8755,
+  "initialOrientation": { "pitchDeg": 10.3132, "yawDeg": 0, "face": null }
+}

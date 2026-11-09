@@ -167,3 +167,53 @@
     transform: none;
   }
 }
+/* Compiled Markdown in the reading panel (src/ui/content-renderers). */
+.crisworld-prose {
+  @apply flex flex-col gap-2 text-sm leading-relaxed;
+}
+.crisworld-prose h1,
+.crisworld-prose h2,
+.crisworld-prose h3,
+.crisworld-prose h4 {
+  @apply mt-2 font-heading font-semibold;
+}
+.crisworld-prose h1 {
+  @apply text-lg;
+}
+.crisworld-prose h2 {
+  @apply text-base;
+}
+.crisworld-prose ul {
+  @apply list-disc pl-5;
+}
+.crisworld-prose ol {
+  @apply list-decimal pl-5;
+}
+.crisworld-prose li + li {
+  @apply mt-1;
+}
+.crisworld-prose a {
+  @apply underline underline-offset-4;
+}
+.crisworld-prose blockquote {
+  @apply border-l-2 border-border pl-3 text-muted-foreground italic;
+}
+.crisworld-prose code {
+  @apply rounded bg-muted px-1 py-0.5 text-xs;
+}
+.crisworld-prose pre {
+  @apply overflow-x-auto rounded-lg bg-muted p-3 text-xs;
+}
+.crisworld-prose pre code {
+  @apply bg-transparent p-0;
+}
+.crisworld-prose table {
+  @apply w-full border-collapse text-xs;
+}
+.crisworld-prose th,
+.crisworld-prose td {
+  @apply border border-border px-2 py-1 text-left;
+}
+.crisworld-prose img {
+  @apply rounded-lg;
+}

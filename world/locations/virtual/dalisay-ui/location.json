@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "dalisay-ui",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.dalisay-ui.name",
+    "shortNameKey": "location.dalisay-ui.short",
+    "descriptionKey": "location.dalisay-ui.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 140
+  },
+  "placement": {
+    "latitude": 32.946864,
+    "longitude": -36.883937,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#d7c4b0",
+    "shore": "#f3e6d4",
+    "accent": "#1f6f8b"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "crislab",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.crislab.name",
+    "shortNameKey": "location.crislab.short",
+    "descriptionKey": "location.crislab.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 20
+  },
+  "placement": {
+    "latitude": 51.416978,
+    "longitude": 0,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#243044",
+    "shore": "#8aa0b8",
+    "accent": "#7ee0ff"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

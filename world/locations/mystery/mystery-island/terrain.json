@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "mystery-island",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      7.557665,
+      5.443099
+    ],
+    "headingDeg": 11.151513,
+    "flatRadiusDeg": 4.297183
+  }
+}

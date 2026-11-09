@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "violet-gate",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      7.610876,
+      5.443099
+    ],
+    "headingDeg": 140.960532,
+    "flatRadiusDeg": 4.297183
+  }
+}

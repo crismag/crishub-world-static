@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "malaysia",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.malaysia.name",
+    "shortNameKey": "location.malaysia.short",
+    "descriptionKey": "location.malaysia.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 90
+  },
+  "placement": {
+    "latitude": -39.870356,
+    "longitude": 163.489904,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#2f7d4a",
+    "shore": "#efd3a1",
+    "accent": "#d5dde6"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

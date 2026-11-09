@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "programming",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      25.210143,
+      25.210143
+    ],
+    "headingDeg": 0,
+    "flatRadiusDeg": 18.048171
+  }
+}

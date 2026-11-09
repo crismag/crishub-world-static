@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "sss-tier-lands",
+  "category": "realm",
+  "status": "published",
+  "display": {
+    "nameKey": "location.sss-tier-lands.name",
+    "shortNameKey": "location.sss-tier-lands.short",
+    "descriptionKey": "location.sss-tier-lands.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 230
+  },
+  "placement": {
+    "latitude": 11.475411,
+    "longitude": -103.862579,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#5a3fb0",
+    "shore": "#c9b8f2",
+    "accent": "#ffcf3f"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "realm"
+  ],
+  "parent": null,
+  "related": []
+}

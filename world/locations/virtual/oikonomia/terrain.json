@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "oikonomia",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      8.162419,
+      6.302536
+    ],
+    "headingDeg": 69.971898,
+    "flatRadiusDeg": 4.297183
+  }
+}

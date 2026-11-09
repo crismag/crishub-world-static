@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "radius": 4,
+  "axialTiltDeg": 23.44,
+  "iceCapLatitudeDeg": 64.1581,
+  "quality": "high",
+  "qualityPresets": {
+    "high": { "landSegments": 640, "oceanSegments": 192, "maxPixelRatio": 1.75 },
+    "medium": { "landSegments": 448, "oceanSegments": 160, "maxPixelRatio": 1.5 },
+    "low": { "landSegments": 320, "oceanSegments": 128, "maxPixelRatio": 1.25 }
+  },
+  "placementRules": { "minShoreSeparationDeg": 25.5, "poleClearanceDeg": 17 }
+}

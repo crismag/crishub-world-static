@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft",
+        "hidden"
+      ]
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "nameKey": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+        },
+        "shortNameKey": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+        },
+        "descriptionKey": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+        },
+        "showLabel": {
+          "type": "boolean"
+        },
+        "showOnGlobe": {
+          "type": "boolean"
+        },
+        "showInDirectory": {
+          "type": "boolean"
+        },
+        "sortOrder": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "nameKey",
+        "shortNameKey",
+        "descriptionKey",
+        "showLabel",
+        "showOnGlobe",
+        "showInDirectory",
+        "sortOrder"
+      ],
+      "additionalProperties": false
+    },
+    "placement": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "altitude": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 0.25,
+          "maximum": 4
+        },
+        "headingDeg": {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        }
+      },
+      "required": [
+        "latitude",
+        "longitude",
+        "altitude",
+        "scale",
+        "headingDeg"
+      ],
+      "additionalProperties": false
+    },
+    "appearance": {
+      "type": "object",
+      "properties": {
+        "ground": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "shore": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      },
+      "required": [
+        "ground",
+        "shore",
+        "accent"
+      ],
+      "additionalProperties": false
+    },
+    "references": {
+      "type": "object",
+      "properties": {
+        "terrain": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "landmarks": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "items": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?!\\/)(?!.*\\.\\.)[a-z0-9][a-z0-9./_-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "terrain",
+        "landmarks",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "interaction": {
+      "type": "object",
+      "properties": {
+        "selectable": {
+          "type": "boolean"
+        },
+        "tooltipEnabled": {
+          "type": "boolean"
+        },
+        "markerRadius": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 3
+        }
+      },
+      "required": [
+        "selectable",
+        "tooltipEnabled",
+        "markerRadius"
+      ],
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "parent": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "category",
+    "status",
+    "display",
+    "placement",
+    "appearance",
+    "references",
+    "interaction",
+    "tags",
+    "parent",
+    "related"
+  ],
+  "additionalProperties": false
+}

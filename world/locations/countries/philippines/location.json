@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "philippines",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.philippines.name",
+    "shortNameKey": "location.philippines.short",
+    "descriptionKey": "location.philippines.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 10
+  },
+  "placement": {
+    "latitude": 50.68589,
+    "longitude": -116.261646,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#2f8f4e",
+    "shore": "#e6c27a",
+    "accent": "#e23b3b"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

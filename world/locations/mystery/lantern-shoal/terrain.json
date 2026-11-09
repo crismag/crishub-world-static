@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "lantern-shoal",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      8.998812,
+      5.443099
+    ],
+    "headingDeg": 79.112729,
+    "flatRadiusDeg": 4.297183
+  }
+}

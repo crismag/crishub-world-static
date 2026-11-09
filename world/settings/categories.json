@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    { "id": "country", "labelKey": "category.country.name", "pluralKey": "category.country.plural", "order": 10, "listed": true },
+    { "id": "virtual", "labelKey": "category.virtual.name", "pluralKey": "category.virtual.plural", "order": 20, "listed": true },
+    { "id": "realm", "labelKey": "category.realm.name", "pluralKey": "category.realm.plural", "order": 30, "listed": true },
+    { "id": "mystery", "labelKey": "category.mystery.name", "pluralKey": "category.mystery.plural", "order": 40, "listed": true },
+    { "id": "special", "labelKey": "category.special.name", "pluralKey": "category.special.plural", "order": 50, "listed": false }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "dalisay-ui",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      9.283679,
+      6.302536
+    ],
+    "headingDeg": 171.214259,
+    "flatRadiusDeg": 4.297183
+  }
+}

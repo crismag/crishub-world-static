@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "isla-sorna",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      8.782062,
+      6.302536
+    ],
+    "headingDeg": 70.547548,
+    "flatRadiusDeg": 4.297183
+  }
+}

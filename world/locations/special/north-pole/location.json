@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "north-pole",
+  "category": "special",
+  "status": "published",
+  "display": {
+    "nameKey": "location.north-pole.name",
+    "shortNameKey": "location.north-pole.short",
+    "descriptionKey": "location.north-pole.description",
+    "showLabel": false,
+    "showOnGlobe": true,
+    "showInDirectory": false,
+    "sortOrder": 900
+  },
+  "placement": {
+    "latitude": 90,
+    "longitude": 0,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#2f8a55",
+    "shore": "#d8c48e",
+    "accent": "#7ff3ff"
+  },
+  "references": {
+    "terrain": null,
+    "landmarks": "landmarks.json",
+    "items": null
+  },
+  "interaction": {
+    "selectable": false,
+    "tooltipEnabled": true,
+    "markerRadius": 0.3
+  },
+  "tags": [
+    "special"
+  ],
+  "parent": null,
+  "related": []
+}

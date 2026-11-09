@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "ui": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "--background",
+          "--foreground",
+          "--card",
+          "--card-foreground",
+          "--primary",
+          "--primary-foreground",
+          "--muted",
+          "--muted-foreground",
+          "--accent",
+          "--border",
+          "--ring",
+          "--radius"
+        ]
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "globe": {
+      "type": "object",
+      "properties": {
+        "ocean": {
+          "type": "object",
+          "properties": {
+            "deep": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "shallow": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "rim": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            }
+          },
+          "required": [
+            "deep",
+            "shallow",
+            "rim"
+          ],
+          "additionalProperties": false
+        },
+        "land": {
+          "type": "object",
+          "properties": {
+            "shore": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "grass": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "meadow": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "rock": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "snow": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            }
+          },
+          "required": [
+            "shore",
+            "grass",
+            "meadow",
+            "rock",
+            "snow"
+          ],
+          "additionalProperties": false
+        },
+        "ice": {
+          "type": "object",
+          "properties": {
+            "cap": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "edge": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            }
+          },
+          "required": [
+            "cap",
+            "edge"
+          ],
+          "additionalProperties": false
+        },
+        "selection": {
+          "type": "object",
+          "properties": {
+            "selected": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "hovered": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            }
+          },
+          "required": [
+            "selected",
+            "hovered"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "ocean",
+        "land",
+        "ice",
+        "selection"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "ui",
+    "globe"
+  ],
+  "additionalProperties": false
+}

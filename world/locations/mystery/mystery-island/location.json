@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "mystery-island",
+  "category": "mystery",
+  "status": "published",
+  "display": {
+    "nameKey": "location.mystery-island.name",
+    "shortNameKey": "location.mystery-island.short",
+    "descriptionKey": "location.mystery-island.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 200
+  },
+  "placement": {
+    "latitude": -46.842289,
+    "longitude": -111.525624,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#2f7a4f",
+    "shore": "#e6cf94",
+    "accent": "#ffd27a"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "mystery"
+  ],
+  "parent": null,
+  "related": []
+}

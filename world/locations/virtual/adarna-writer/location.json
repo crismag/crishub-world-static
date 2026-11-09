@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "adarna-writer",
+  "category": "virtual",
+  "status": "published",
+  "display": {
+    "nameKey": "location.adarna-writer.name",
+    "shortNameKey": "location.adarna-writer.short",
+    "descriptionKey": "location.adarna-writer.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 60
+  },
+  "placement": {
+    "latitude": 0.540294,
+    "longitude": 38.909621,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#6b4a78",
+    "shore": "#f0d9b8",
+    "accent": "#f2c14e"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "virtual"
+  ],
+  "parent": null,
+  "related": []
+}

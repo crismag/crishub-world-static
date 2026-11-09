@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "smileGreeting": {
+    "enabled": false,
+    "formation": "smiling-hemisphere",
+    "messageKey": "discovery.smile",
+    "alignment": 0.97
+  }
+}

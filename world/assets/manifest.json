@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "root": "public/world-assets",
+  "assets": [
+    {
+      "id": "icon.site.favicon",
+      "type": "icon",
+      "path": "icons/site/favicon.svg",
+      "displayName": "Site icon",
+      "version": 1,
+      "status": "active",
+      "license": "original",
+      "attribution": null,
+      "tags": ["site"]
+    }
+  ]
+}

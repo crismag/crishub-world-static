@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "default",
+  "ui": {},
+  "globe": {
+    "ocean": { "deep": "#298ce6", "shallow": "#4dbdfa", "rim": "#9ee0ff" },
+    "land": { "shore": "#2f9e3c", "grass": "#4cbf3c", "meadow": "#9edb4c", "rock": "#8d7f6c", "snow": "#f2f6fa" },
+    "ice": { "cap": "#f4fbff", "edge": "#cde9f7" },
+    "selection": { "selected": "#f0c36a", "hovered": "#f7f4ee" }
+  }
+}

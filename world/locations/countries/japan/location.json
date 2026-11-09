@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "japan",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.japan.name",
+    "shortNameKey": "location.japan.short",
+    "descriptionKey": "location.japan.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 150
+  },
+  "placement": {
+    "latitude": 33.547738,
+    "longitude": -83.800466,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#3f7d4e",
+    "shore": "#efe6d6",
+    "accent": "#d84b3c"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}

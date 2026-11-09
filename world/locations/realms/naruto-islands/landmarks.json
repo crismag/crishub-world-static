@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "locationId": "naruto-islands",
+  "landmarks": [
+    {
+      "id": "leaf",
+      "preset": "leaf-village",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": "leaf",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.3,
+      "visible": true,
+      "animation": "default",
+      "params": {}
+    },
+    {
+      "id": "rain",
+      "preset": "rain-town",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": "rain",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.3,
+      "visible": true,
+      "animation": "default",
+      "params": {}
+    },
+    {
+      "id": "sound",
+      "preset": "sound-stage",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": "sound",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.3,
+      "visible": true,
+      "animation": "default",
+      "params": {}
+    },
+    {
+      "id": "sand",
+      "preset": "sand-town",
+      "assetId": null,
+      "labelKey": null,
+      "lobe": "sand",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": [
+        0,
+        0,
+        0
+      ],
+      "scale": 1.3,
+      "visible": true,
+      "animation": "default",
+      "params": {}
+    }
+  ]
+}

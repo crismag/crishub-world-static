@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "filters": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "labelKey": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+(?:\\.[a-z0-9-]+)+$"
+          },
+          "categories": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "all"
+              },
+              {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                }
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "labelKey",
+          "categories"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "directory": {
+      "type": "object",
+      "properties": {
+        "groupByCategory": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "groupByCategory"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "filters",
+    "directory"
+  ],
+  "additionalProperties": false
+}

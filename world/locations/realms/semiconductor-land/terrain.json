@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "locationId": "semiconductor-land",
+  "shape": {
+    "type": "oval",
+    "radiusDeg": [
+      9.855963,
+      6.302536
+    ],
+    "headingDeg": 44.797619,
+    "flatRadiusDeg": 4.297183
+  }
+}

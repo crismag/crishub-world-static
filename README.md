@@ -2,7 +2,7 @@
 
 Crishub World is a miniature planet you explore in the browser. Countries and software projects are ordinary shores on the same globe. Spin it, lean in, and step ashore.
 
-The first playable slice is the Interactive Globe Explorer: one rotating world with 26 named shores (countries, projects, imagined realms, and four uncharted shores), a programming continent, and a few empty islets, all in one open ocean.
+The first playable slice is the Interactive Globe Explorer: one rotating world with 24 named shores (countries, projects, imagined realms, and four uncharted shores), a programming continent, and a few empty islets, all in one open ocean.
 
 ## Wander
 
@@ -25,16 +25,17 @@ npm install
 npm run dev
 ```
 
-The dev server uses port **4731**.
+The dev server uses port **4731**. It compiles `world/` on start and again whenever a file there changes.
 
 ```bash
-npm test
+npm run world:validate   # check every file in world/, every reference, and the geography
+npm run world:build      # compile world/ into src/generated/world.json (dev, test, and build do this first)
+npm run assets:audit     # check asset files, formats, sizes, names, and licenses
+npm test                 # configuration, regression, rotation, and interface tests
 npm run lint
-npm run build
+npm run build            # static site in dist/
 npm run preview
 ```
-
-`npm run build` writes a static site to `dist/`.
 
 ## Put it on Hostinger
 
@@ -42,43 +43,28 @@ The site is a static build, which fits shared hosting.
 
 1. Run `npm run build`.
 2. Open the document root for `world.crishub.com` in hPanel (the subdomain’s `public_html`).
-3. Upload the **contents** of `dist/`, including `index.html` and the `assets` folder.
+3. Upload the **contents** of `dist/`, including `index.html`, the `assets` folder, and the `world-assets` folder.
 4. Visit the subdomain. Links like `/#singapore` work without rewrite rules, because the shore lives in the hash.
 
 Asset paths are relative, so the same `dist/` folder also works if the site is served from a subfolder.
 
-## The North Pole
+## How it is built
 
-The Beacon of Possibilities stands on the planet's north pole: an icy lighthouse with a glowing crystal crown, two compass rings, glowing ice, and a ring of aurora overhead. Hover it for its name, or click to keep the name showing. It is drawn in `src/globe/NorthPole.tsx`. No shore may stand within the clearance set in `src/data/north-pole.ts`, and the tests check that.
+The engine decides how CrisWorld works; configuration decides what it contains. Every island, landmark, label, article, color, layout, control setting, and asset is described in `world/` (JSON and Markdown) and compiled into one validated registry the app runs on. Adding or changing a destination is a content task, not a code change.
 
-## The South Pole
+- [docs/authoring.md](docs/authoring.md): how to add an island, move or rename it, add landmarks and articles, change the layout and controls, and adjust the poles and the smile.
+- [docs/configuration.md](docs/configuration.md): every configuration file and field.
+- [docs/assets.md](docs/assets.md): managing images, icons, and 3D models.
+- [docs/architecture.md](docs/architecture.md): how it fits together, what stays in code, and known limitations.
 
-The Vault of Mysteries lies on the opposite end of the axis: a low octagonal vault half buried in an ice crater, with a violet core and light leaking up through the ice. Around it are ice mountains, cliffs, crevasses, glowing fissures, broken pillars, frozen crystals, and light snow. Hover or click it for its name and a short line. It is drawn in `src/globe/SouthPole.tsx`, and both poles share the tooltip in `src/globe/PoleHotspot.tsx`.
+A few places worth knowing:
 
-## A small secret
-
-Turn the globe to the side opposite the programming continent and look closely. The islands there are laid out in `src/data/smile.ts` as a flat map that is wrapped onto the sphere, and dressed in `src/globe/Smile.tsx`. Named shores keep clear of that side. An optional line can appear when that side faces you; set `smile.message` to turn it on. It is off by default.
-
-## The programming continent
-
-One wide continent faces you when the page opens. The languages and technologies are painted across its ground in large letters, readable from orbit.
-
-The project islands sit in an even ring around it, each across a narrow strait. Every other shore is placed further out.
-
-Edit the list in `src/data/programming.ts`. The words wrap and resize to fit on their own. Shores are placed around the rest of the globe, outside the continent.
-
-## Add a shore
-
-Destinations live in `src/data/destinations.ts`. Each entry needs an id, a kind (`place`, `project`, `realm`, or `mystery`), a short story, and terrain colors. Positions are scattered with a Fibonacci lattice so new shores stay apart and clear of the programming continent. They are not real-world coordinates.
-
-A country also gets an outline in `src/data/outlines.ts`: a few points in a unit box, an anchor where the landmark stands, and a scale. Other shores get an oval with a random stretch and heading.
-
-The land itself is built in `src/data/terrain.ts`. Ridges, snowy peaks, and hills form inland, but the ground under each landmark and under the programming lettering stays flat. The tests check that, and that every island reaches the open ocean.
-
-Then draw the landmark in `src/globe/landmarks.tsx` by adding a branch for that id. Keep the model small, readable from above, and about the same visual weight as the others.
+- **The North Pole** carries the Beacon of Possibilities and **the South Pole** the Vault of Mysteries: `world/locations/special/north-pole/` and `south-pole/`.
+- **The programming continent** paints its technologies across its ground, ringed by the project islands. Edit the words in `world/locations/special/programming/landmarks.json`.
+- **The far side** has a small secret, in `world/formations/`.
 
 Uncharted shores are visible on purpose. They explain that they are not open yet. They are not puzzles and they are not a second map.
 
 ## Stack
 
-Vite, React, TypeScript, Three.js, React Three Fiber, and shadcn/ui. No accounts and no server. The globe is drawn with primitive meshes so the site does not depend on external 3D files.
+Vite, React, TypeScript, Three.js, React Three Fiber, shadcn/ui, Zod (configuration schemas, build time only), and markdown-it (content, build time only). No accounts and no server. The globe is drawn with primitive meshes, so the site does not depend on external 3D files.

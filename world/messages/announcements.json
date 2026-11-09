@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "announcements": [
+    {
+      "id": "welcome",
+      "messageKey": "announcement.welcome",
+      "enabled": false,
+      "priority": 10,
+      "startsAt": null,
+      "endsAt": null,
+      "placement": "top",
+      "dismissible": true
+    }
+  ]
+}

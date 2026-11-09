@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "hong-kong",
+  "category": "country",
+  "status": "published",
+  "display": {
+    "nameKey": "location.hong-kong.name",
+    "shortNameKey": "location.hong-kong.short",
+    "descriptionKey": "location.hong-kong.description",
+    "showLabel": true,
+    "showOnGlobe": true,
+    "showInDirectory": true,
+    "sortOrder": 130
+  },
+  "placement": {
+    "latitude": -33.547738,
+    "longitude": 78.505432,
+    "altitude": 0,
+    "scale": 1,
+    "headingDeg": 0
+  },
+  "appearance": {
+    "ground": "#5c6b7a",
+    "shore": "#d9d3c7",
+    "accent": "#f0d78c"
+  },
+  "references": {
+    "terrain": "terrain.json",
+    "landmarks": "landmarks.json",
+    "items": "items.json"
+  },
+  "interaction": {
+    "selectable": true,
+    "tooltipEnabled": true,
+    "markerRadius": 0.42
+  },
+  "tags": [
+    "country"
+  ],
+  "parent": null,
+  "related": []
+}
