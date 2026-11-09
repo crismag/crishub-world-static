@@ -7,6 +7,9 @@ import type { LandmarkProps } from '@/engine/landmarks/types.ts'
  * already showing; if it cannot load, the shore simply has no model instead of breaking
  * the globe.
  */
+/** Where the build puts the Draco decoder (see vite.config.ts), relative to the page. */
+const DRACO_DECODERS = `${import.meta.env.BASE_URL}decoders/draco/`
+
 class Quiet extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false }
   static getDerivedStateFromError() {
@@ -18,7 +21,8 @@ class Quiet extends Component<{ children: ReactNode }, { failed: boolean }> {
 }
 
 function Model({ path }: { path: string }) {
-  const { scene } = useGLTF(path)
+  // Compressed models decode with the copy of Draco this site serves, never a CDN.
+  const { scene } = useGLTF(path, DRACO_DECODERS)
   // A copy per landmark, so the same model can stand on several shores.
   const copy = useMemo(() => scene.clone(true), [scene])
   return <primitive object={copy} />

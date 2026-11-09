@@ -1,0 +1,5 @@
+# Managed assets keep their names across versions (see docs/assets.md), so browsers may reuse
+# them for a day and then check for a newer copy.
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=86400, must-revalidate"
+</IfModule>

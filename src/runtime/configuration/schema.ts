@@ -76,7 +76,8 @@ export const GlobeSettings = z.strictObject({
   axialTiltDeg: z.number().min(0).max(45),
   /** Latitude (north and south) where the polar ice caps begin. */
   iceCapLatitudeDeg: z.number().min(45).max(89),
-  quality: z.enum(['high', 'medium', 'low']),
+  /** `auto` picks per device: lighter meshes on phones and low-memory devices. `?quality=` overrides it. */
+  quality: z.enum(['auto', 'high', 'medium', 'low']),
   qualityPresets: z.strictObject({ high: QualityPreset, medium: QualityPreset, low: QualityPreset }),
   /** Validation rules for placing shores. Breaking them fails `world:validate`. */
   placementRules: z.strictObject({

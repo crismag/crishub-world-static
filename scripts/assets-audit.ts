@@ -57,7 +57,8 @@ const root = join(project, manifest.root)
 
 function walk(dir: string): string[] {
   if (!existsSync(dir)) return []
-  return readdirSync(dir).flatMap((name) => {
+  // Server configuration (.htaccess) lives beside the assets but is not an asset.
+  return readdirSync(dir).filter((name) => !name.startsWith('.')).flatMap((name) => {
     const path = join(dir, name)
     return statSync(path).isDirectory() ? walk(path) : [path]
   })

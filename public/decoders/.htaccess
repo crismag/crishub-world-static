@@ -1,0 +1,5 @@
+# The Draco decoder is versioned with three.js but keeps its file names, so browsers may reuse
+# it for a day and then check for a newer copy.
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=86400, must-revalidate"
+</IfModule>

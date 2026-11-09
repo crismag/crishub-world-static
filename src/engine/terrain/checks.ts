@@ -12,7 +12,7 @@ import { COAST, PLATEAU, createTerrain } from './terrain.ts'
  * - No shore stands on the polar ice.
  * - Painted lettering lies on flat ground.
  */
-export function checkTerrain(world: WorldRegistry): Diagnostic[] {
+export function checkTerrain(world: WorldRegistry<unknown>): Diagnostic[] {
   const problems: Diagnostic[] = []
   const terrain = createTerrain(world)
   const file = (id: string) => `world/locations (${id})`

@@ -98,7 +98,7 @@ function makeSeed(id: string, ownerId: string, position: Vec3, shape: Shape, fla
 }
 
 /** Every island in the world as land seeds, in a stable order. */
-export function landSeedsOf(world: WorldRegistry): LandSeed[] {
+export function landSeedsOf(world: WorldRegistry<unknown>): LandSeed[] {
   const seeds: LandSeed[] = []
   for (const location of world.locations) {
     if (!location.display.showOnGlobe) continue
@@ -227,7 +227,7 @@ function angleBetween(a: Vec3, b: Vec3): number {
 export type Terrain = ReturnType<typeof createTerrain>
 
 /** Builds the terrain functions for one compiled world. */
-export function createTerrain(world: WorldRegistry) {
+export function createTerrain(world: WorldRegistry<unknown>) {
   const seeds = landSeedsOf(world)
   /** Where the ice caps begin, as |y| on the unit sphere. */
   const iceEdge = Math.sin((world.settings.globe.iceCapLatitudeDeg * Math.PI) / 180)

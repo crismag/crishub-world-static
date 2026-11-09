@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import type { Vec3 } from '@/runtime/configuration/registry-types.ts'
+import { qualityPreset } from '@/runtime/configuration/quality.ts'
 import { getLocation, settings, world } from '@/runtime/world-registry/index.ts'
 import { useExplorer } from '@/state/explorer.tsx'
 import { toonRamp } from '@/engine/effects/materials.ts'
@@ -10,7 +11,7 @@ import { atmosphereFragment, atmosphereVertex, oceanFragment, oceanVertex } from
 import { COAST, fbm, meadowAt, mulberry32, smoothstep, terrain } from '@/engine/terrain/index.ts'
 
 const GLOBE_RADIUS = settings.globe.radius
-const quality = settings.globe.qualityPresets[settings.globe.quality]
+const quality = qualityPreset
 const { globe: palette } = world.theme
 
 /** A theme color as raw values for a shader, which writes them straight to the screen. */
@@ -108,6 +109,8 @@ function createLandGeometry(): THREE.BufferGeometry {
 export function Ocean() {
   const material = useRef<THREE.ShaderMaterial>(null)
   const geometry = useMemo(() => createOceanGeometry(), [])
+  // Free the GPU buffers if the globe is ever taken down.
+  useEffect(() => () => geometry.dispose(), [geometry])
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
@@ -135,6 +138,7 @@ export function Ocean() {
 /** Raised, rounded continents. Land under the sea surface is simply hidden by the ocean. */
 export function Land() {
   const geometry = useMemo(() => createLandGeometry(), [])
+  useEffect(() => () => geometry.dispose(), [geometry])
   return (
     <mesh geometry={geometry}>
       <meshToonMaterial vertexColors gradientMap={toonRamp} />

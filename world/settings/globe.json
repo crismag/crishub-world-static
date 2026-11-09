@@ -3,7 +3,7 @@
   "radius": 4,
   "axialTiltDeg": 23.44,
   "iceCapLatitudeDeg": 64.1581,
-  "quality": "high",
+  "quality": "auto",
   "qualityPresets": {
     "high": { "landSegments": 640, "oceanSegments": 192, "maxPixelRatio": 1.75 },
     "medium": { "landSegments": 448, "oceanSegments": 160, "maxPixelRatio": 1.5 },

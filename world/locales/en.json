@@ -111,6 +111,9 @@
   "ui.legend.label": "Show shores",
   "ui.nav.shores": "Shores",
   "ui.panel.close": "Close",
+  "ui.panel.failed": "This writeup could not be loaded. Check your connection and try again.",
+  "ui.panel.loading": "Loading…",
+  "ui.panel.retry": "Try again",
   "world.description": "Crishub World is a miniature planet. Spin the globe to visit countries, project worlds, and shores that are still uncharted.",
   "world.name": "Crishub World"
 }

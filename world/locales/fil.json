@@ -35,5 +35,8 @@
   "location.north-pole.short": "Hilagang Polo",
   "location.south-pole.name": "Timog na Polo — Ang Bodega ng mga Hiwaga",
   "location.south-pole.short": "Timog na Polo",
-  "location.south-pole.description": "Sa ilalim ng nagyeyelong gilid ng Crishub World, may sinaunang hiwagang naghihintay na matuklasan."
+  "location.south-pole.description": "Sa ilalim ng nagyeyelong gilid ng Crishub World, may sinaunang hiwagang naghihintay na matuklasan.",
+  "ui.panel.loading": "Naglo-load…",
+  "ui.panel.failed": "Hindi ma-load ang sulating ito. Suriin ang iyong koneksiyon at subukang muli.",
+  "ui.panel.retry": "Subukang muli"
 }

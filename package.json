@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "world:validate": "node --experimental-strip-types scripts/world.ts validate",
     "world:build": "node --experimental-strip-types scripts/world.ts build",
-    "assets:audit": "node --experimental-strip-types scripts/assets-audit.ts"
+    "assets:audit": "node --experimental-strip-types scripts/assets-audit.ts",
+    "serve:dist": "node --experimental-strip-types scripts/serve-dist.ts",
+    "verify:dist": "node --experimental-strip-types scripts/verify-dist.ts"
   },
   "dependencies": {
     "@fontsource-variable/fredoka": "^5.3.0",

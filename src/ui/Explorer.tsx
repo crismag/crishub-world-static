@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Component, useEffect, type ReactNode } from 'react'
+import { quality, qualityPreset } from '@/runtime/configuration/quality.ts'
 import { useText } from '@/runtime/localization/index.tsx'
 import { UI } from '@/runtime/localization/ui-keys.ts'
 import { selectableLocations, settings, world } from '@/runtime/world-registry/index.ts'
@@ -27,7 +28,7 @@ class GlobeBoundary extends Component<BoundaryProps, BoundaryState> {
   }
 }
 
-const { camera, controls, globe } = settings
+const { camera, controls } = settings
 const layout = world.layouts.explorer
 
 /** The camera's starting position: along its configured direction, at the default distance. */
@@ -78,7 +79,6 @@ export function Explorer() {
     return () => window.removeEventListener('keydown', onKey)
   }, [select, setPanelOpen])
 
-  const quality = globe.qualityPresets[globe.quality]
 
   return (
     <main className="relative h-dvh overflow-hidden bg-background text-foreground" aria-busy={!ready && !failed}>
@@ -97,7 +97,7 @@ export function Explorer() {
             <Canvas
               className="h-full w-full touch-none"
               camera={{ position: cameraPosition(), fov: camera.fovDeg, near: camera.near, far: camera.far }}
-              dpr={[1, quality.maxPixelRatio]}
+              dpr={[1, qualityPreset.maxPixelRatio]}
               flat
               gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
               performance={{ min: 0.5 }}
@@ -105,6 +105,10 @@ export function Explorer() {
                 gl.domElement.dataset.globe = 'true'
                 gl.domElement.setAttribute('role', 'application')
                 gl.domElement.setAttribute('aria-label', t(UI.globeLabel))
+                // `?perf` exposes the renderer's counters (geometries, textures, draw calls) for measuring.
+                if (new URLSearchParams(window.location.search).has('perf')) {
+                  ;(window as Window & { crisworldPerf?: unknown }).crisworldPerf = { quality, renderer: gl.info }
+                }
                 setReady(true)
               }}
             >

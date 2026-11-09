@@ -65,7 +65,7 @@ describe('the configured layout', () => {
 })
 
 describe('choosing a shore', () => {
-  test('shows its chip, and Read opens its writeups', () => {
+  test('shows its chip, and Read opens its writeups, loaded on demand', async () => {
     render(<Providers><Explorer /></Providers>)
     fireEvent.click(screen.getByRole('button', { name: 'Japan' }))
     expect(window.location.hash).toBe('#japan')
@@ -73,7 +73,8 @@ describe('choosing a shore', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Read about Japan' }))
     const panel = screen.getByRole('complementary')
     expect(within(panel).getByRole('heading', { name: 'Japan' })).toBeTruthy()
-    expect(within(panel).getByText(/A vermilion gate, a pagoda/)).toBeTruthy()
+    // The header comes from the registry at once; the article arrives from its own content file.
+    expect(await within(panel).findByText(/A vermilion gate, a pagoda/)).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
     expect(screen.queryByRole('complementary')).toBeNull()
     fireEvent.click(screen.getByRole('button', { name: 'Close Japan' }))
@@ -122,6 +123,24 @@ describe('filters and the directory', () => {
     fireEvent.click(screen.getByText('projects only'))
     fireEvent.click(screen.getAllByRole('button', { name: 'Japan' })[0]!)
     expect(screen.getByTestId('filter').textContent).toBe('all')
+  })
+})
+
+describe('content loading', () => {
+  test('each shore\'s writeups load separately, and only once', async () => {
+    const { loadContent } = await import('@/runtime/content/index.ts')
+    const first = loadContent('japan')
+    expect(loadContent('japan')).toBe(first)
+    const sections = await first
+    expect(sections.map((section) => section.id)).toEqual(['overview'])
+    expect(sections[0]!.html).toContain('vermilion gate')
+    expect(await loadContent('north-pole')).toEqual([])
+  })
+
+  test('the up-front registry carries section summaries, not articles', () => {
+    const japan = world.locations.find((location) => location.id === 'japan')!
+    expect(japan.sections).toEqual([{ id: 'overview', display: 'article', order: 10, title: 'About Japan', titleKey: null }])
+    expect(JSON.stringify(world)).not.toContain('vermilion gate')
   })
 })
 

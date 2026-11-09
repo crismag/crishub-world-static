@@ -1,25 +1,26 @@
 import data from '../../generated/world.json'
-import type { CompiledFormation, CompiledLocation, Vec3, WorldRegistry } from '../configuration/registry-types.ts'
+import type { CompiledFormation, RuntimeLocation, RuntimeRegistry, Vec3 } from '../configuration/registry-types.ts'
 
 /**
- * The compiled world, loaded once. Every engine and UI module reads configuration through
- * here; nothing loads world/ files on its own. The data was validated by `world:build`.
+ * The compiled world, loaded once with the app. Every engine and UI module reads configuration
+ * through here; nothing loads world/ files on its own. The data was validated by `world:build`.
+ * Articles are not in here: they load per location, on demand (see runtime/content).
  */
-export const world = data as unknown as WorldRegistry
+export const world = data as unknown as RuntimeRegistry
 
 export const settings = world.settings
 
 const byId = new Map(world.locations.map((location) => [location.id, location]))
 
-export function getLocation(id: string): CompiledLocation | undefined {
+export function getLocation(id: string): RuntimeLocation | undefined {
   return byId.get(id)
 }
 
 /** Locations drawn on the globe. */
-export const globeLocations: readonly CompiledLocation[] = world.locations.filter((location) => location.display.showOnGlobe)
+export const globeLocations: readonly RuntimeLocation[] = world.locations.filter((location) => location.display.showOnGlobe)
 
 /** Shores a visitor can select: in the legend, the directory, and the URL hash. */
-export const selectableLocations: readonly CompiledLocation[] = globeLocations.filter(
+export const selectableLocations: readonly RuntimeLocation[] = globeLocations.filter(
   (location) => location.interaction.selectable,
 )
 
@@ -37,7 +38,7 @@ export function centerOf(id: string): Vec3 | null {
 }
 
 /** The selectable shore named by a URL hash such as `#japan`, if any. */
-export function locationFromHash(hash: string): CompiledLocation | undefined {
+export function locationFromHash(hash: string): RuntimeLocation | undefined {
   const id = hash.replace(/^#/, '').trim().toLowerCase()
   if (!id) return undefined
   const location = byId.get(id)
@@ -45,7 +46,7 @@ export function locationFromHash(hash: string): CompiledLocation | undefined {
 }
 
 /** Whether a navigation filter (from layouts/navigation.json) shows a location. */
-export function filterShows(filterId: string, location: CompiledLocation): boolean {
+export function filterShows(filterId: string, location: RuntimeLocation): boolean {
   const filter = world.layouts.navigation.filters.find((item) => item.id === filterId)
   if (!filter || filter.categories === 'all') return true
   return filter.categories.includes(location.category)

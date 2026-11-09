@@ -20,6 +20,9 @@ export const UI = {
   closePanel: 'ui.panel.close',
   directoryTitle: 'ui.directory.title',
   dismiss: 'ui.announcement.dismiss',
+  contentLoading: 'ui.panel.loading',
+  contentFailed: 'ui.panel.failed',
+  retry: 'ui.panel.retry',
 } as const
 
 export const UI_KEYS: readonly string[] = Object.values(UI)

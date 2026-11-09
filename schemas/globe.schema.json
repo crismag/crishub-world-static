@@ -24,6 +24,7 @@
     "quality": {
       "type": "string",
       "enum": [
+        "auto",
         "high",
         "medium",
         "low"

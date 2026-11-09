@@ -1,8 +1,8 @@
-import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { z } from 'zod'
 import { compileWorld, type Diagnostic } from '../src/runtime/configuration/compile.ts'
-import type { WorldRegistry } from '../src/runtime/configuration/registry-types.ts'
+import { splitContent, type WorldRegistry } from '../src/runtime/configuration/registry-types.ts'
 import * as schema from '../src/runtime/configuration/schema.ts'
 import { checkTerrain } from '../src/engine/terrain/checks.ts'
 
@@ -39,20 +39,39 @@ const schemaFiles: Record<string, z.ZodType> = {
   'asset-manifest': schema.AssetManifest,
 }
 
+/** Writes a file only when its contents changed, so the dev server reloads only on real edits. */
+function writeIfChanged(file: string, text: string): boolean {
+  if (existsSync(file) && readFileSync(file, 'utf8') === text) return false
+  writeFileSync(file, text)
+  return true
+}
+
 /**
- * Validates world/ and, if it is sound, writes src/generated/world.json (only when it changed,
- * so the dev server reloads only on real edits) and the JSON Schemas in schemas/.
+ * Validates world/ and, if it is sound, writes the static runtime data:
+ * - src/generated/world.json: the up-front registry (settings, places, shapes, landmarks, text,
+ *   and section summaries), bundled into the app;
+ * - src/generated/content/<location>.json: each location's compiled articles, which the build
+ *   turns into small fingerprinted files fetched only when that shore is opened;
+ * and the JSON Schemas in schemas/.
  */
 export function buildWorld(project: string) {
   const result = validateWorld(project)
   const errors = result.diagnostics.filter((item) => item.level === 'error')
   if (!result.registry || errors.length) return { ...result, errors, written: false }
-  const target = join(project, 'src/generated/world.json')
-  const json = `${JSON.stringify(result.registry)}\n`
-  const previous = existsSync(target) ? readFileSync(target, 'utf8') : ''
-  if (previous !== json) {
-    mkdirSync(join(project, 'src/generated'), { recursive: true })
-    writeFileSync(target, json)
+  const { runtime, content } = splitContent(result.registry)
+  const generated = join(project, 'src/generated')
+  const contentDir = join(generated, 'content')
+  mkdirSync(contentDir, { recursive: true })
+  let written = writeIfChanged(join(generated, 'world.json'), `${JSON.stringify(runtime)}\n`)
+  for (const [id, sections] of Object.entries(content)) {
+    written = writeIfChanged(join(contentDir, `${id}.json`), `${JSON.stringify(sections)}\n`) || written
+  }
+  // Remove bundles for locations that no longer have content.
+  for (const file of readdirSync(contentDir)) {
+    if (!(file.replace(/\.json$/, '') in content)) {
+      rmSync(join(contentDir, file))
+      written = true
+    }
   }
   mkdirSync(join(project, 'schemas'), { recursive: true })
   for (const [name, definition] of Object.entries(schemaFiles)) {
@@ -60,7 +79,7 @@ export function buildWorld(project: string) {
     const text = `${JSON.stringify(z.toJSONSchema(definition, { io: 'input' }), null, 2)}\n`
     if (!existsSync(file) || readFileSync(file, 'utf8') !== text) writeFileSync(file, text)
   }
-  return { ...result, errors, written: previous !== json }
+  return { ...result, errors, written, contentBundles: Object.keys(content).length }
 }
 
 export function formatDiagnostics(diagnostics: Diagnostic[]): string {

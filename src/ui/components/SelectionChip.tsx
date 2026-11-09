@@ -1,4 +1,5 @@
 import { BookOpen, X } from 'lucide-react'
+import { loadContent } from '@/runtime/content/index.ts'
 import { useText } from '@/runtime/localization/index.tsx'
 import { UI } from '@/runtime/localization/ui-keys.ts'
 import { categoryOf, getLocation, world } from '@/runtime/world-registry/index.ts'
@@ -14,6 +15,8 @@ export function SelectionChip({ readMore = false }: { readMore?: boolean }) {
   const { selectedId, select, setPanelOpen, panelOpen } = useExplorer()
   const location = selectedId ? getLocation(selectedId) : undefined
   if (!location) return null
+  // Start fetching the writeups now, so they are ready when Read is pressed.
+  if (location.sections.length) void loadContent(location.id)
   const name = t(location.display.nameKey)
   const category = categoryOf(location.category)
   const { leftPanel, rightPanel } = world.layouts.explorer

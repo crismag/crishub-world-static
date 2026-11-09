@@ -2,7 +2,7 @@ import { Html } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
-import type { CompiledLandmark, CompiledLocation, Vec3 } from '@/runtime/configuration/registry-types.ts'
+import type { CompiledLandmark, RuntimeLocation, Vec3 } from '@/runtime/configuration/registry-types.ts'
 import { offsetOnSphere } from '@/runtime/configuration/sphere.ts'
 import { useText } from '@/runtime/localization/index.tsx'
 import { categoryOf, filterShows, settings, world } from '@/runtime/world-registry/index.ts'
@@ -58,7 +58,7 @@ function relativeTo(parent: Pose, child: Pose) {
   }
 }
 
-export function LocationNode({ location }: { location: CompiledLocation }) {
+export function LocationNode({ location }: { location: RuntimeLocation }) {
   const { t } = useText()
   const { selectedId, hoveredId, filter, reduced, setHoveredId, choose } = useExplorer()
   const groupRef = useRef<THREE.Group>(null)

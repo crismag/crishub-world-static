@@ -1,3 +1,5 @@
+import { execSync } from 'node:child_process'
+import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
@@ -43,8 +45,76 @@ function crisWorld(): Plugin {
   }
 }
 
+/** Three.js's Draco decoder, served from this site instead of Google's CDN. */
+const DRACO_DIR = path.join(project, 'node_modules/three/examples/jsm/libs/draco/gltf')
+const DRACO_FILES = ['draco_decoder.js', 'draco_decoder.wasm', 'draco_wasm_wrapper.js']
+
+/**
+ * Everything the static site needs beyond the app bundle:
+ * - the Draco decoder at decoders/draco/, fetched only if a compressed 3D model is shown;
+ * - build-info.json, a small stamp saying what was built and when, for checking a deployment.
+ */
+function staticSite(): Plugin {
+  return {
+    name: 'crisworld-static-site',
+    configureServer(server) {
+      server.middlewares.use('/decoders/draco/', (request, response, next) => {
+        const name = (request.url ?? '').replace(/^\//, '').split('?')[0] ?? ''
+        if (!DRACO_FILES.includes(name)) return next()
+        response.setHeader('Content-Type', name.endsWith('.wasm') ? 'application/wasm' : 'text/javascript')
+        response.end(readFileSync(path.join(DRACO_DIR, name)))
+      })
+    },
+    generateBundle() {
+      for (const name of DRACO_FILES) {
+        this.emitFile({ type: 'asset', fileName: `decoders/draco/${name}`, source: readFileSync(path.join(DRACO_DIR, name)) })
+      }
+      const git = (command: string) => {
+        try {
+          return execSync(command, { cwd: project, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
+        } catch {
+          return null
+        }
+      }
+      const pkg = JSON.parse(readFileSync(path.join(project, 'package.json'), 'utf8')) as { version: string }
+      const contentDir = path.join(project, 'src/generated/content')
+      this.emitFile({
+        type: 'asset',
+        fileName: 'build-info.json',
+        source: `${JSON.stringify(
+          {
+            app: 'crisworld',
+            version: pkg.version,
+            commit: git('git rev-parse --short HEAD'),
+            uncommittedChanges: git('git status --porcelain') ? true : false,
+            builtAt: new Date().toISOString(),
+            contentBundles: readdirSync(contentDir).length,
+          },
+          null,
+          2,
+        )}\n`,
+      })
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [crisWorld(), react(), tailwindcss()],
+  plugins: [crisWorld(), staticSite(), react(), tailwindcss()],
+  build: {
+    // The globe's libraries are large but rarely change. Splitting them out lets browsers keep
+    // them cached across content and app updates, which then download only the small app file.
+    chunkSizeWarningLimit: 900,
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: 'vendor-three', test: /node_modules[\\/]three[\\/]/, priority: 30 },
+            { name: 'vendor-react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/, priority: 20 },
+          ],
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(project, './src'),

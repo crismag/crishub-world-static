@@ -80,7 +80,14 @@ export type CompiledSection = {
   links: { href: string; text: string }[]
 }
 
-export type CompiledLocation = {
+/** What the always-loaded registry keeps of each section; the full section loads on demand. */
+export type SectionSummary = Pick<CompiledSection, 'id' | 'display' | 'order' | 'title' | 'titleKey'>
+
+/**
+ * A location. The compiler's output carries full sections (`CompiledSection`); the registry
+ * shipped to the browser carries only `SectionSummary`, with the articles in separate files.
+ */
+export type CompiledLocation<Section = CompiledSection> = {
   id: string
   category: string
   display: {
@@ -101,7 +108,7 @@ export type CompiledLocation = {
   appearance: { ground: string; shore: string; accent: string }
   terrain: CompiledTerrain
   landmarks: CompiledLandmark[]
-  sections: CompiledSection[]
+  sections: Section[]
   interaction: { selectable: boolean; tooltipEnabled: boolean; markerRadius: number }
   tags: string[]
   parent: string | null
@@ -133,7 +140,7 @@ export type CompiledFormation = {
 
 export type CompiledAsset = { id: string; type: string; path: string; displayName: string }
 
-export type WorldRegistry = {
+export type WorldRegistry<Section = CompiledSection> = {
   schemaVersion: 1
   world: { id: string; nameKey: string; descriptionKey: string; defaultLocale: string; locales: string[] }
   settings: {
@@ -145,7 +152,7 @@ export type WorldRegistry = {
     discovery: Without<z.infer<typeof DiscoverySettings>>
   }
   categories: Without<z.infer<typeof CategoriesFile>>['categories']
-  locations: CompiledLocation[]
+  locations: CompiledLocation<Section>[]
   formations: CompiledFormation[]
   layouts: {
     explorer: ExplorerLayoutT
@@ -156,4 +163,21 @@ export type WorldRegistry = {
   locales: Record<string, Record<string, string>>
   announcements: Without<z.infer<typeof AnnouncementsFile>>['announcements']
   assets: Record<string, CompiledAsset>
+}
+
+/** The registry the browser loads up front: everything except the articles themselves. */
+export type RuntimeRegistry = WorldRegistry<SectionSummary>
+export type RuntimeLocation = CompiledLocation<SectionSummary>
+
+/** Splits a compiled world into the up-front registry and one content bundle per location. */
+export function splitContent(registry: WorldRegistry): { runtime: RuntimeRegistry; content: Record<string, CompiledSection[]> } {
+  const content: Record<string, CompiledSection[]> = {}
+  const locations = registry.locations.map((location) => {
+    if (location.sections.length) content[location.id] = location.sections
+    return {
+      ...location,
+      sections: location.sections.map(({ id, display, order, title, titleKey }) => ({ id, display, order, title, titleKey })),
+    }
+  })
+  return { runtime: { ...registry, locations }, content }
 }

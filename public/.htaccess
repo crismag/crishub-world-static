@@ -1,0 +1,42 @@
+# CrisWorld on Hostinger (Apache / LiteSpeed). Copied into dist/ by the build.
+# The site is static files only: no rewrites, no server code, no fallback to index.html.
+# Shores are addressed by URL hash (/#japan), which never reaches the server, so a missing
+# file correctly returns 404 instead of the app.
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_mime.c>
+  AddType text/javascript .js .mjs
+  AddType text/css .css
+  AddType application/json .json
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
+  AddType model/gltf-binary .glb
+  AddType model/gltf+json .gltf
+  AddType application/wasm .wasm
+  AddType image/ktx2 .ktx2
+  AddType audio/mpeg .mp3
+  AddType audio/ogg .ogg
+  AddType audio/mp4 .m4a
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml model/gltf+json application/wasm
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Everything in assets/ is fingerprinted (name-<hash>.ext): a changed file gets a new name,
+  # so browsers may keep these for a year without checking.
+  <FilesMatch "-[A-Za-z0-9_-]{8}\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # The page and the build stamp change with every deploy: always check for a new version.
+  <FilesMatch "^(index\.html|build-info\.json)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

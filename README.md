@@ -39,14 +39,15 @@ npm run preview
 
 ## Put it on Hostinger
 
-The site is a static build, which fits shared hosting.
+CrisWorld is a static site: Hostinger only serves files, and everything runs in the visitor's browser. No Node.js, PHP, or database is needed after deployment.
 
-1. Run `npm run build`.
-2. Open the document root for `world.crishub.com` in hPanel (the subdomain’s `public_html`).
-3. Upload the **contents** of `dist/`, including `index.html`, the `assets` folder, and the `world-assets` folder.
-4. Visit the subdomain. Links like `/#singapore` work without rewrite rules, because the shore lives in the hash.
+```bash
+npm run build          # writes dist/
+npm run verify:dist    # checks dist/ is self-contained and reports download sizes
+npm run serve:dist     # browse the build at http://localhost:4732, served the way Hostinger will
+```
 
-Asset paths are relative, so the same `dist/` folder also works if the site is served from a subfolder.
+Upload the **contents** of `dist/` (including the hidden `.htaccess`) to the subdomain's folder. [docs/deployment.md](docs/deployment.md) covers the web root, caching, MIME types, routing, rollback, and a post-deploy checklist. [docs/static-readiness.md](docs/static-readiness.md) is the readiness report, with before/after sizes.
 
 ## How it is built
 
@@ -56,6 +57,7 @@ The engine decides how CrisWorld works; configuration decides what it contains. 
 - [docs/configuration.md](docs/configuration.md): every configuration file and field.
 - [docs/assets.md](docs/assets.md): managing images, icons, and 3D models.
 - [docs/architecture.md](docs/architecture.md): how it fits together, what stays in code, and known limitations.
+- [docs/deployment.md](docs/deployment.md): building and deploying to Hostinger.
 
 A few places worth knowing:
 

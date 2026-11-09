@@ -1,4 +1,4 @@
-import type { CompiledLandmark, CompiledLocation } from '@/runtime/configuration/registry-types.ts'
+import type { CompiledLandmark, RuntimeLocation } from '@/runtime/configuration/registry-types.ts'
 
 /** What every landmark preset receives. */
 export type LandmarkProps = {
@@ -12,7 +12,7 @@ export type LandmarkProps = {
   scale: number
   /** Distance from the globe's center to the ground under the landmark, world units. */
   groundRadius: number
-  location: CompiledLocation
+  location: RuntimeLocation
   landmark: CompiledLandmark
   /** Hover tooltip for landmarks that are not selectable shores, or null. */
   tooltip: { title: string; description?: string } | null
